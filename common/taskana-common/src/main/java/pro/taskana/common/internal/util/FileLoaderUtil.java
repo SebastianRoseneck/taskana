@@ -34,13 +34,13 @@ public class FileLoaderUtil {
         return inputStream;
       } catch (FileNotFoundException e) {
         throw new SystemException(
-            String.format("Could not find a file with provided path %s", fileToLoad));
+            String.format("Could not find a file with provided path '%s'", fileToLoad));
       }
     }
     InputStream inputStream = clazz.getResourceAsStream(fileToLoad);
     if (inputStream == null) {
       throw new SystemException(
-          String.format("Could not find a file in the classpath %s", fileToLoad));
+          String.format("Could not find a file in the classpath '%s'", fileToLoad));
     }
     LOGGER.debug("Load file {} from classpath", fileToLoad);
     return inputStream;

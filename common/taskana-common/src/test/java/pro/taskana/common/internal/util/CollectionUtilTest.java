@@ -1,4 +1,4 @@
-package pro.taskana.common.api;
+package pro.taskana.common.internal.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
-import pro.taskana.common.internal.util.CollectionUtil;
 
 class CollectionUtilTest {
 
