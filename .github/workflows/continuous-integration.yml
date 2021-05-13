@@ -54,6 +54,8 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ env.CACHE_MAVEN_NAME }}
       - name: Compile & build
         run: ./mvnw -B install -DskipTests -Dasciidoctor.skip -Djacoco.skip
+      - name: Validate license header
+        run: ./mvnw -B license:check
       - name: Populate cache
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -152,6 +154,8 @@ jobs:
           path: ${{ env.ARTIFACTS_TASKANA_JARS_PATH }}
       - name: Compile
         run: ./mvnw -B test-compile -f rest/taskana-rest-spring-example-wildfly -DskipTests -Djacoco.skip
+      - name: Validate license header
+        run: ./mvnw -B license:check -f rest/taskana-rest-spring-example-wildfly
       - name: Cancel workflow
         if: failure()
         uses: andymckay/cancel-action@0.2
