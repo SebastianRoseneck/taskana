@@ -28,14 +28,14 @@ public class ObjectReference {
     // check that all values in the ObjectReference are set correctly
     if (objectReference == null) {
       throw new InvalidArgumentException(
-          String.format("ObectReferenc %s of %s must not be null.", objRefType, objName));
-    } else if (objectReference.getCompany() == null || objectReference.getCompany().length() == 0) {
+          String.format("ObjectReference %s of %s must not be null.", objRefType, objName));
+    } else if (objectReference.getCompany() == null || objectReference.getCompany().isEmpty()) {
       throw new InvalidArgumentException(
           String.format("Company of %s of %s must not be empty", objRefType, objName));
-    } else if (objectReference.getType() == null || objectReference.getType().length() == 0) {
+    } else if (objectReference.getType() == null || objectReference.getType().isEmpty()) {
       throw new InvalidArgumentException(
           String.format("Type of %s of %s must not be empty", objRefType, objName));
-    } else if (objectReference.getValue() == null || objectReference.getValue().length() == 0) {
+    } else if (objectReference.getValue() == null || objectReference.getValue().isEmpty()) {
       throw new InvalidArgumentException(
           String.format("Value of %s of %s must not be empty", objRefType, objName));
     }

@@ -46,8 +46,8 @@ public abstract class AbstractAccTest {
 
   protected static void resetDb(boolean dropTables) throws Exception {
 
-    DataSource dataSource = TaskanaEngineTestConfiguration.getDataSource();
-    String schemaName = TaskanaEngineTestConfiguration.getSchemaName();
+    DataSource dataSource = DataSourceGenerator.getDataSource();
+    String schemaName = DataSourceGenerator.getSchemaName();
     taskanaEngineConfiguration = new TaskanaEngineConfiguration(dataSource, false, schemaName);
     taskanaEngineConfiguration.setGermanPublicHolidaysEnabled(true);
     SampleDataGenerator sampleDataGenerator =

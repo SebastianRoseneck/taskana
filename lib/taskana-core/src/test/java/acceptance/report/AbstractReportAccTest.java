@@ -1,6 +1,6 @@
 package acceptance.report;
 
-import acceptance.TaskanaEngineTestConfiguration;
+import acceptance.DataSourceGenerator;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -15,8 +15,8 @@ public abstract class AbstractReportAccTest {
   protected static TaskanaEngine taskanaEngine;
 
   protected static void resetDb() throws Exception {
-    DataSource dataSource = TaskanaEngineTestConfiguration.getDataSource();
-    String schemaName = TaskanaEngineTestConfiguration.getSchemaName();
+    DataSource dataSource = DataSourceGenerator.getDataSource();
+    String schemaName = DataSourceGenerator.getSchemaName();
     taskanaEngineConfiguration = new TaskanaEngineConfiguration(dataSource, false, schemaName);
     taskanaEngineConfiguration.setGermanPublicHolidaysEnabled(false);
     taskanaEngine = taskanaEngineConfiguration.buildTaskanaEngine();

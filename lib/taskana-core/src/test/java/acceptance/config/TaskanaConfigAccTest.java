@@ -2,7 +2,7 @@ package acceptance.config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import acceptance.TaskanaEngineTestConfiguration;
+import acceptance.DataSourceGenerator;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,9 +27,7 @@ class TaskanaConfigAccTest {
   void setup() {
     taskanaEngineConfiguration =
         new TaskanaEngineConfiguration(
-            TaskanaEngineTestConfiguration.getDataSource(),
-            true,
-            TaskanaEngineTestConfiguration.getSchemaName());
+            DataSourceGenerator.getDataSource(), true, DataSourceGenerator.getSchemaName());
   }
 
   @Test
@@ -56,12 +54,12 @@ class TaskanaConfigAccTest {
     String delimiter = ";";
     taskanaEngineConfiguration =
         new TaskanaEngineConfiguration(
-            TaskanaEngineTestConfiguration.getDataSource(),
+            DataSourceGenerator.getDataSource(),
             true,
             true,
             propertiesFileName,
             delimiter,
-            TaskanaEngineTestConfiguration.getSchemaName());
+            DataSourceGenerator.getSchemaName());
     assertThat(taskanaEngineConfiguration.getClassificationTypes()).isEmpty();
   }
 
@@ -71,12 +69,12 @@ class TaskanaConfigAccTest {
     String delimiter = ";";
     taskanaEngineConfiguration =
         new TaskanaEngineConfiguration(
-            TaskanaEngineTestConfiguration.getDataSource(),
+            DataSourceGenerator.getDataSource(),
             true,
             true,
             propertiesFileName,
             delimiter,
-            TaskanaEngineTestConfiguration.getSchemaName());
+            DataSourceGenerator.getSchemaName());
     assertThat(taskanaEngineConfiguration.getClassificationCategoriesByTypeMap())
         .containsExactly(
             Map.entry("TASK", Collections.emptyList()),
@@ -89,12 +87,12 @@ class TaskanaConfigAccTest {
     String delimiter = ";";
     taskanaEngineConfiguration =
         new TaskanaEngineConfiguration(
-            TaskanaEngineTestConfiguration.getDataSource(),
+            DataSourceGenerator.getDataSource(),
             true,
             true,
             propertiesFileName,
             delimiter,
-            TaskanaEngineTestConfiguration.getSchemaName());
+            DataSourceGenerator.getSchemaName());
     assertThat(taskanaEngineConfiguration.getClassificationCategoriesByTypeMap())
         .containsExactly(
             Map.entry("TASK", List.of("EXTERNAL", "MANUAL", "AUTOMATIC", "PROCESS")),

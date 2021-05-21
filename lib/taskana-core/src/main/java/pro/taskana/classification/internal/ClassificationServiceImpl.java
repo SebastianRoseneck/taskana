@@ -371,7 +371,7 @@ public class ClassificationServiceImpl implements ClassificationService {
 
   private void checkClassificationId(ClassificationImpl classificationImpl)
       throws InvalidArgumentException {
-    if (classificationImpl.getId() != null && !"".equals(classificationImpl.getId())) {
+    if (classificationImpl.getId() != null && !classificationImpl.getId().isEmpty()) {
       throw new InvalidArgumentException("ClassificationId should be null on creation");
     }
   }
@@ -386,7 +386,7 @@ public class ClassificationServiceImpl implements ClassificationService {
       masterClassification.setDomain("");
       masterClassification.setIsValidInDomain(false);
       try {
-        if (classification.getParentKey() != null && !"".equals(classification.getParentKey())) {
+        if (classification.getParentKey() != null && !classification.getParentKey().isEmpty()) {
           masterClassification.setParentId(
               getClassification(classification.getParentKey(), "").getId());
         }
@@ -429,7 +429,7 @@ public class ClassificationServiceImpl implements ClassificationService {
   private void initDefaultClassificationValues(ClassificationImpl classification)
       throws InvalidArgumentException {
     Instant now = Instant.now();
-    if (classification.getId() == null || "".equals(classification.getId())) {
+    if (classification.getId() == null || classification.getId().isEmpty()) {
       classification.setId(IdGenerator.generateWithPrefix(IdGenerator.ID_PREFIX_CLASSIFICATION));
     }
 

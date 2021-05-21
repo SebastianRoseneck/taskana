@@ -185,7 +185,7 @@ public class AttachmentHandler {
     } catch (PersistenceException e) {
       throw new AttachmentPersistenceException(
           String.format(
-              "Cannot insert the Attachement %s for Task %s  because it already exists.",
+              "Cannot insert the Attachment %s for Task %s  because it already exists.",
               attachmentImpl.getId(), newTaskImpl.getId()),
           e.getCause());
     }
@@ -195,14 +195,14 @@ public class AttachmentHandler {
     if (attachment.getId() == null) {
       attachment.setId(IdGenerator.generateWithPrefix(IdGenerator.ID_PREFIX_ATTACHMENT));
     }
+    if (attachment.getTaskId() == null) {
+      attachment.setTaskId(newTask.getId());
+    }
     if (attachment.getCreated() == null) {
       attachment.setCreated(newTask.getModified());
     }
     if (attachment.getModified() == null) {
       attachment.setModified(attachment.getCreated());
-    }
-    if (attachment.getTaskId() == null) {
-      attachment.setTaskId(newTask.getId());
     }
   }
 

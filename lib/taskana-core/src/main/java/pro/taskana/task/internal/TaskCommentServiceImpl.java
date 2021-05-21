@@ -26,7 +26,7 @@ class TaskCommentServiceImpl {
   private final TaskServiceImpl taskService;
   private final TaskCommentMapper taskCommentMapper;
 
-  TaskCommentServiceImpl(
+  public TaskCommentServiceImpl(
       InternalTaskanaEngine taskanaEngine,
       TaskCommentMapper taskCommentMapper,
       TaskServiceImpl taskService) {
@@ -89,7 +89,7 @@ class TaskCommentServiceImpl {
     return taskCommentImplToUpdate;
   }
 
-  TaskComment createTaskComment(TaskComment taskCommentToCreate)
+  public TaskComment createTaskComment(TaskComment taskCommentToCreate)
       throws NotAuthorizedException, TaskNotFoundException, InvalidArgumentException {
 
     TaskCommentImpl taskCommentImplToCreate = (TaskCommentImpl) taskCommentToCreate;
@@ -171,7 +171,7 @@ class TaskCommentServiceImpl {
     }
   }
 
-  TaskComment getTaskComment(String taskCommentId)
+  public TaskComment getTaskComment(String taskCommentId)
       throws TaskCommentNotFoundException, NotAuthorizedException, TaskNotFoundException,
           InvalidArgumentException {
 
