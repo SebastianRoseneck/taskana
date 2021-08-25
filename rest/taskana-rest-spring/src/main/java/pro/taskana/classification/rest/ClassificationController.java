@@ -1,5 +1,6 @@
 package pro.taskana.classification.rest;
 
+import io.leangen.graphql.annotations.GraphQLInputField;
 import java.beans.ConstructorProperties;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -233,7 +234,22 @@ public class ClassificationController {
 
     @ConstructorProperties({"sortBy", "order"})
     public ClassificationQuerySortParameter(
-        List<ClassificationQuerySortBy> sortBy, List<SortDirection> order)
+        @GraphQLInputField(
+                description =
+                    "Sort the result by a given field. Multiple sort values can be declared. When"
+                        + " the primary sort value is the same, the second one will be used.\n"
+                        + "Must be one of [APPLICATION_ENTRY_POINT, DOMAIN, KEY, CATEGORY,"
+                        + " CUSTOM_1, CUSTOM_2, CUSTOM_3, CUSTOM_4, CUSTOM_5, CUSTOM_6, CUSTOM_7,"
+                        + " CUSTOM_8, NAME, PARENT_ID, PARENT_KEY, PRIORITY, SERVICE_LEVEL].")
+            List<ClassificationQuerySortBy> sortBy,
+        @GraphQLInputField(
+                description =
+                    "The order direction for each sort value. This value requires the use of"
+                        + " 'sort-by'. The amount of sort-by and order declarations have to match."
+                        + " Alternatively the value can be omitted. If done so the default sort"
+                        + " order (ASCENDING) will be applied to every sort-by value.\n"
+                        + "Must be one of [ASCENDING, DESCENDING].")
+            List<SortDirection> order)
         throws InvalidArgumentException {
       super(sortBy, order);
     }

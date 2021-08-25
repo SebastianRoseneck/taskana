@@ -1,16 +1,26 @@
 package pro.taskana.classification.common.models;
 
+import io.leangen.graphql.annotations.GraphQLInputField;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.annotations.types.GraphQLType;
 import javax.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;
 
 import pro.taskana.classification.api.models.ClassificationSummary;
 
 /** EntityModel class for {@link ClassificationSummary}. */
+@GraphQLType(
+    description =
+        "Classifications allow to identify the type of a task. The task derives some major"
+            + " attributes from the classification, such as the service level and the priority.\n"
+            + "\n"
+            + "This is a specific short model-object which only requires the most important"
+            + " information.")
 public class ClassificationSummaryRepresentationModel
     extends RepresentationModel<ClassificationSummaryRepresentationModel> {
 
   /** Unique Id. */
-  @NotNull protected String classificationId;
+  protected String classificationId;
   /**
    * The key of the Classification. This is typically an externally known code or abbreviation of
    * the Classification.
@@ -27,6 +37,7 @@ public class ClassificationSummaryRepresentationModel
    */
   @NotNull protected String category;
   /** The domain for which this classification is specified. */
+  @GraphQLInputField(defaultValue = "")
   protected String domain;
   /** The name of the classification. */
   @NotNull protected String name;
@@ -35,15 +46,15 @@ public class ClassificationSummaryRepresentationModel
   /** The key of the parent classification. Empty string ("") if this is a root classification. */
   protected String parentKey;
   /** The priority of the classification. */
-  @NotNull protected Integer priority;
+  @NotNull protected int priority;
   /**
    * The service level of the classification.
    *
    * <p>This is stated according to ISO 8601.
    */
-  @NotNull protected String serviceLevel;
+  protected String serviceLevel;
   /** The type of classification. Types can be configured in the file 'taskana.properties'. */
-  protected String type;
+  @NotNull protected String type;
   /** A custom property with name "1". */
   protected String custom1;
   /** A custom property with name "2". */
@@ -61,6 +72,7 @@ public class ClassificationSummaryRepresentationModel
   /** A custom property with name "8". */
   protected String custom8;
 
+  @GraphQLQuery(description = "Unique Id.")
   public String getClassificationId() {
     return classificationId;
   }
@@ -69,6 +81,10 @@ public class ClassificationSummaryRepresentationModel
     this.classificationId = classificationId;
   }
 
+  @GraphQLQuery(
+      description =
+          "The key of the Classification. This is typically an externally known code or"
+              + " abbreviation of the Classification.")
   public String getKey() {
     return key;
   }
@@ -77,6 +93,10 @@ public class ClassificationSummaryRepresentationModel
     this.key = key;
   }
 
+  @GraphQLQuery(
+      description =
+          "The Id of the parent classification. Empty string (\"\") if this is a root"
+              + " classification.")
   public String getParentId() {
     return parentId;
   }
@@ -85,6 +105,10 @@ public class ClassificationSummaryRepresentationModel
     this.parentId = parentId;
   }
 
+  @GraphQLQuery(
+      description =
+          "The key of the parent classification. Empty string (\"\") if this is a root"
+              + " classification.")
   public String getParentKey() {
     return parentKey;
   }
@@ -93,6 +117,10 @@ public class ClassificationSummaryRepresentationModel
     this.parentKey = parentKey;
   }
 
+  @GraphQLQuery(
+      description =
+          "The category of the classification. Categories can be configured in the file"
+              + " 'taskana.properties'.")
   public String getCategory() {
     return category;
   }
@@ -101,6 +129,9 @@ public class ClassificationSummaryRepresentationModel
     this.category = category;
   }
 
+  @GraphQLQuery(
+      description =
+          "The type of classification. Types can be configured in the file 'taskana.properties'.")
   public String getType() {
     return type;
   }
@@ -109,6 +140,7 @@ public class ClassificationSummaryRepresentationModel
     this.type = type;
   }
 
+  @GraphQLQuery(description = "The domain for which this classification is specified.")
   public String getDomain() {
     return domain;
   }
@@ -117,6 +149,7 @@ public class ClassificationSummaryRepresentationModel
     this.domain = domain;
   }
 
+  @GraphQLQuery(description = "The name of the classification.")
   public String getName() {
     return name;
   }
@@ -125,7 +158,8 @@ public class ClassificationSummaryRepresentationModel
     this.name = name;
   }
 
-  public Integer getPriority() {
+  @GraphQLQuery(description = "The priority of the classification.")
+  public int getPriority() {
     return priority;
   }
 
@@ -133,6 +167,10 @@ public class ClassificationSummaryRepresentationModel
     this.priority = priority;
   }
 
+  @GraphQLQuery(
+      description =
+          "The logical name of the entry point. This is needed by the task list application to"
+              + " determine the redirect to work on a task of this Classification.")
   public String getApplicationEntryPoint() {
     return applicationEntryPoint;
   }
@@ -141,6 +179,11 @@ public class ClassificationSummaryRepresentationModel
     this.applicationEntryPoint = applicationEntryPoint;
   }
 
+  @GraphQLQuery(
+      description =
+          "The service level of the classification.\n"
+              + "\n"
+              + "This is stated according to ISO 8601.")
   public String getServiceLevel() {
     return serviceLevel;
   }
@@ -149,6 +192,7 @@ public class ClassificationSummaryRepresentationModel
     this.serviceLevel = serviceLevel;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"1\".")
   public String getCustom1() {
     return custom1;
   }
@@ -157,6 +201,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom1 = custom1;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"2\".")
   public String getCustom2() {
     return custom2;
   }
@@ -165,6 +210,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom2 = custom2;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"3\".")
   public String getCustom3() {
     return custom3;
   }
@@ -173,6 +219,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom3 = custom3;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"4\".")
   public String getCustom4() {
     return custom4;
   }
@@ -181,6 +228,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom4 = custom4;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"5\".")
   public String getCustom5() {
     return custom5;
   }
@@ -189,6 +237,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom5 = custom5;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"6\".")
   public String getCustom6() {
     return custom6;
   }
@@ -197,6 +246,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom6 = custom6;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"7\".")
   public String getCustom7() {
     return custom7;
   }
@@ -205,6 +255,7 @@ public class ClassificationSummaryRepresentationModel
     this.custom7 = custom7;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"8\".")
   public String getCustom8() {
     return custom8;
   }

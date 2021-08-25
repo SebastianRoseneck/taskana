@@ -3,6 +3,7 @@ package pro.taskana.classification.common.filter;
 import static pro.taskana.common.internal.util.CheckedConsumer.wrap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.leangen.graphql.annotations.GraphQLInputField;
 import java.beans.ConstructorProperties;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -124,20 +125,75 @@ public class ClassificationQueryFilterParameter
     "custom8Like"
   })
   public ClassificationQueryFilterParameter(
-      String[] name,
-      String[] nameLike,
-      String[] key,
-      String[] category,
-      String[] domain,
-      String[] type,
-      String[] custom1Like,
-      String[] custom2Like,
-      String[] custom3Like,
-      String[] custom4Like,
-      String[] custom5Like,
-      String[] custom6Like,
-      String[] custom7Like,
-      String[] custom8Like) {
+      @GraphQLInputField(
+              description = "Filter by the name of the classification. This is an exact match.")
+          String[] name,
+      @GraphQLInputField(
+              description =
+                  "Filter by the name of the classification. This results in a substring search. (%"
+                      + " is appended to the beginning and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] nameLike,
+      @GraphQLInputField(
+              description = "Filter by the key of the classification. This is an exact match.")
+          String[] key,
+      @GraphQLInputField(
+              description = "Filter by the category of the classification. This is an exact match.")
+          String[] category,
+      @GraphQLInputField(
+              description = "Filter by the domain of the classification. This is an exact match.")
+          String[] domain,
+      @GraphQLInputField(
+              description = "Filter by the type of the classification. This is an exact match.")
+          String[] type,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom1. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom1Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom2. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom2Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom3. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom3Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom4. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom4Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom5. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom5Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom6. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom6Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom7. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom7Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom8. This results in a substring search.."
+                      + " (% is appended to the beginning and end of the requested value). Further"
+                      + " SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom8Like) {
     this.name = name;
     this.nameLike = nameLike;
     this.key = key;
