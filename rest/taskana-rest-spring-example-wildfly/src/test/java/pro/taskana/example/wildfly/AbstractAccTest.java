@@ -8,15 +8,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import pro.taskana.classification.rest.models.ClassificationSummaryRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationSummaryRepresentationModel;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
 import pro.taskana.simplehistory.rest.HistoryRestEndpoints;
 import pro.taskana.simplehistory.rest.models.TaskHistoryEventPagedRepresentationModel;
-import pro.taskana.task.rest.models.ObjectReferenceRepresentationModel;
-import pro.taskana.task.rest.models.TaskRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketSummaryRepresentationModel;
+import pro.taskana.task.common.models.ObjectReferenceRepresentationModel;
+import pro.taskana.task.common.models.TaskRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketSummaryRepresentationModel;
 
 @TaskanaSpringBootTest
 public class AbstractAccTest {

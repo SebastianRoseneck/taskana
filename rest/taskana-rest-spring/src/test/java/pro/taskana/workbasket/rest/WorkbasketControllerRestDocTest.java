@@ -20,10 +20,10 @@ import pro.taskana.workbasket.api.WorkbasketService;
 import pro.taskana.workbasket.api.WorkbasketType;
 import pro.taskana.workbasket.api.models.Workbasket;
 import pro.taskana.workbasket.api.models.WorkbasketAccessItem;
-import pro.taskana.workbasket.rest.assembler.WorkbasketAccessItemRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.assembler.WorkbasketRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.models.WorkbasketAccessItemCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketRepresentationModel;
+import pro.taskana.workbasket.common.assembler.WorkbasketAccessItemRepresentationModelAssembler;
+import pro.taskana.workbasket.common.assembler.WorkbasketRepresentationModelAssembler;
+import pro.taskana.workbasket.common.models.WorkbasketAccessItemCollectionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
 
 @ExtendWith(JaasExtension.class)
 class WorkbasketControllerRestDocTest extends BaseRestDocTest {

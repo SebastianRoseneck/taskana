@@ -14,15 +14,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import pro.taskana.classification.api.models.Classification;
-import pro.taskana.classification.rest.assembler.ClassificationRepresentationModelAssembler;
-import pro.taskana.classification.rest.models.ClassificationRepresentationModel;
+import pro.taskana.classification.common.assembler.ClassificationRepresentationModelAssembler;
+import pro.taskana.classification.common.models.ClassificationRepresentationModel;
 import pro.taskana.common.api.exceptions.InvalidArgumentException;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
 import pro.taskana.task.api.models.Task;
-import pro.taskana.task.rest.assembler.TaskRepresentationModelAssembler;
-import pro.taskana.task.rest.models.TaskRepresentationModel;
+import pro.taskana.task.common.assembler.TaskRepresentationModelAssembler;
+import pro.taskana.task.common.models.TaskRepresentationModel;
 
 /** Test async updates. */
 @TaskanaSpringBootTest

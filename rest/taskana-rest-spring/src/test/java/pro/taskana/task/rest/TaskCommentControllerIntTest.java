@@ -20,8 +20,8 @@ import org.springframework.web.client.HttpStatusCodeException;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
-import pro.taskana.task.rest.models.TaskCommentCollectionRepresentationModel;
-import pro.taskana.task.rest.models.TaskCommentRepresentationModel;
+import pro.taskana.task.common.models.TaskCommentCollectionRepresentationModel;
+import pro.taskana.task.common.models.TaskCommentRepresentationModel;
 
 /** Test TaskCommentController. */
 @TaskanaSpringBootTest

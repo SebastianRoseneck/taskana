@@ -42,13 +42,14 @@ import pro.taskana.workbasket.api.exceptions.WorkbasketNotFoundException;
 import pro.taskana.workbasket.api.models.Workbasket;
 import pro.taskana.workbasket.api.models.WorkbasketAccessItem;
 import pro.taskana.workbasket.api.models.WorkbasketSummary;
-import pro.taskana.workbasket.rest.assembler.WorkbasketAccessItemRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.assembler.WorkbasketRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.assembler.WorkbasketSummaryRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.models.DistributionTargetsCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketAccessItemCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketSummaryPagedRepresentationModel;
+import pro.taskana.workbasket.common.assembler.WorkbasketAccessItemRepresentationModelAssembler;
+import pro.taskana.workbasket.common.assembler.WorkbasketRepresentationModelAssembler;
+import pro.taskana.workbasket.common.assembler.WorkbasketSummaryRepresentationModelAssembler;
+import pro.taskana.workbasket.common.models.DistributionTargetsCollectionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketAccessItemCollectionRepresentationModel;
+import pro.taskana.workbasket.common.filter.WorkbasketQueryFilterParameter;
+import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketSummaryPagedRepresentationModel;
 
 /** Controller for all {@link Workbasket} related endpoints. */
 @RestController
@@ -414,7 +415,7 @@ public class WorkbasketController {
   public static class WorkbasketQuerySortParameter
       extends QuerySortParameter<WorkbasketQuery, WorkbasketQuerySortBy> {
 
-    @ConstructorProperties({"sort-by", "order"})
+    @ConstructorProperties({"sortBy", "order"})
     public WorkbasketQuerySortParameter(
         List<WorkbasketQuerySortBy> sortBy, List<SortDirection> order)
         throws InvalidArgumentException {

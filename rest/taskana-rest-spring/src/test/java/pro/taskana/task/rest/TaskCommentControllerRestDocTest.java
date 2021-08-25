@@ -16,8 +16,8 @@ import pro.taskana.common.test.security.JaasExtension;
 import pro.taskana.common.test.security.WithAccessId;
 import pro.taskana.task.api.TaskService;
 import pro.taskana.task.api.models.TaskComment;
-import pro.taskana.task.rest.assembler.TaskCommentRepresentationModelAssembler;
-import pro.taskana.task.rest.models.TaskCommentRepresentationModel;
+import pro.taskana.task.common.assembler.TaskCommentRepresentationModelAssembler;
+import pro.taskana.task.common.models.TaskCommentRepresentationModel;
 
 @ExtendWith(JaasExtension.class)
 class TaskCommentControllerRestDocTest extends BaseRestDocTest {

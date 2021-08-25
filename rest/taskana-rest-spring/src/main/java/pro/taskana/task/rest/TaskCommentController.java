@@ -28,9 +28,9 @@ import pro.taskana.task.api.TaskService;
 import pro.taskana.task.api.exceptions.TaskCommentNotFoundException;
 import pro.taskana.task.api.exceptions.TaskNotFoundException;
 import pro.taskana.task.api.models.TaskComment;
-import pro.taskana.task.rest.assembler.TaskCommentRepresentationModelAssembler;
-import pro.taskana.task.rest.models.TaskCommentCollectionRepresentationModel;
-import pro.taskana.task.rest.models.TaskCommentRepresentationModel;
+import pro.taskana.task.common.assembler.TaskCommentRepresentationModelAssembler;
+import pro.taskana.task.common.models.TaskCommentCollectionRepresentationModel;
+import pro.taskana.task.common.models.TaskCommentRepresentationModel;
 
 /** Controller for all {@link TaskComment} related endpoints. */
 @RestController
@@ -213,7 +213,7 @@ public class TaskCommentController {
     return Optional.ofNullable(comparator);
   }
 
-  enum TaskCommentsSortBy {
+  public enum TaskCommentsSortBy {
     CREATED(Comparator.comparing(TaskComment::getCreated)),
     MODIFIED(Comparator.comparing(TaskComment::getModified));
 

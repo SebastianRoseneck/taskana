@@ -17,14 +17,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpStatusCodeException;
 
-import pro.taskana.classification.rest.models.ClassificationSummaryPagedRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationSummaryPagedRepresentationModel;
 import pro.taskana.common.api.exceptions.ErrorCode;
 import pro.taskana.common.rest.TaskanaRestExceptionHandler.MalformedQueryParameter;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
 import pro.taskana.workbasket.api.WorkbasketPermission;
 import pro.taskana.workbasket.api.WorkbasketType;
-import pro.taskana.workbasket.rest.models.WorkbasketSummaryPagedRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketSummaryPagedRepresentationModel;
 
 /** Test general Exception Handling. */
 @TaskanaSpringBootTest

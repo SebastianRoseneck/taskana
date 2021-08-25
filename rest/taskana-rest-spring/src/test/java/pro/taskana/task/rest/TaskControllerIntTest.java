@@ -31,20 +31,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 
-import pro.taskana.classification.rest.models.ClassificationSummaryRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationSummaryRepresentationModel;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
 import pro.taskana.sampledata.SampleDataGenerator;
 import pro.taskana.task.api.TaskState;
-import pro.taskana.task.rest.models.ObjectReferenceRepresentationModel;
-import pro.taskana.task.rest.models.TaskRepresentationModel;
-import pro.taskana.task.rest.models.TaskRepresentationModel.CustomAttribute;
-import pro.taskana.task.rest.models.TaskSummaryCollectionRepresentationModel;
-import pro.taskana.task.rest.models.TaskSummaryPagedRepresentationModel;
-import pro.taskana.task.rest.models.TaskSummaryRepresentationModel;
-import pro.taskana.task.rest.routing.IntegrationTestTaskRouter;
-import pro.taskana.workbasket.rest.models.WorkbasketSummaryRepresentationModel;
+import pro.taskana.task.common.models.ObjectReferenceRepresentationModel;
+import pro.taskana.task.common.models.TaskRepresentationModel;
+import pro.taskana.task.common.models.TaskRepresentationModel.CustomAttribute;
+import pro.taskana.task.common.models.TaskSummaryCollectionRepresentationModel;
+import pro.taskana.task.common.models.TaskSummaryPagedRepresentationModel;
+import pro.taskana.task.common.models.TaskSummaryRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketSummaryRepresentationModel;
 
 /** Test Task Controller. */
 @TaskanaSpringBootTest
@@ -667,30 +666,6 @@ class TaskControllerIntTest {
         };
 
     assertThatThrownBy(httpCall).isInstanceOf(HttpStatusCodeException.class);
-  }
-
-  @Test
-  void should_RouteCreatedTask_When_CreatingTaskWithoutWorkbasketInformation() {
-    TaskRepresentationModel taskRepresentationModel = getTaskResourceSample();
-    taskRepresentationModel.setWorkbasketSummary(null);
-
-    String url = restHelper.toUrl(RestEndpoints.URL_TASKS);
-    HttpEntity<TaskRepresentationModel> auth =
-        new HttpEntity<>(taskRepresentationModel, RestHelper.generateHeadersForUser("user-1-1"));
-    ResponseEntity<TaskRepresentationModel> responseCreate =
-        TEMPLATE.exchange(url, HttpMethod.POST, auth, TASK_MODEL_TYPE);
-
-    assertThat(responseCreate.getBody().getWorkbasketSummary().getWorkbasketId())
-        .isEqualTo(IntegrationTestTaskRouter.DEFAULT_ROUTING_TARGET);
-
-    String url2 =
-        restHelper.toUrl(RestEndpoints.URL_TASKS_ID, responseCreate.getBody().getTaskId());
-    HttpEntity<Object> auth2 = new HttpEntity<>(RestHelper.generateHeadersForUser("admin"));
-
-    ResponseEntity<TaskRepresentationModel> responseDeleted =
-        TEMPLATE.exchange(
-            url2, HttpMethod.DELETE, auth2, ParameterizedTypeReference.forType(Void.class));
-    assertThat(responseDeleted.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
   }
 
   @Test

@@ -30,10 +30,10 @@ import pro.taskana.classification.api.exceptions.ClassificationNotFoundException
 import pro.taskana.classification.api.exceptions.MalformedServiceLevelException;
 import pro.taskana.classification.api.models.Classification;
 import pro.taskana.classification.api.models.ClassificationSummary;
-import pro.taskana.classification.rest.assembler.ClassificationDefinitionCollectionRepresentationModel;
-import pro.taskana.classification.rest.assembler.ClassificationDefinitionRepresentationModelAssembler;
-import pro.taskana.classification.rest.models.ClassificationDefinitionRepresentationModel;
-import pro.taskana.classification.rest.models.ClassificationRepresentationModel;
+import pro.taskana.classification.common.assembler.ClassificationDefinitionCollectionRepresentationModel;
+import pro.taskana.classification.common.assembler.ClassificationDefinitionRepresentationModelAssembler;
+import pro.taskana.classification.common.models.ClassificationDefinitionRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationRepresentationModel;
 import pro.taskana.common.api.exceptions.ConcurrencyException;
 import pro.taskana.common.api.exceptions.DomainNotFoundException;
 import pro.taskana.common.api.exceptions.InvalidArgumentException;

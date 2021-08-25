@@ -13,7 +13,7 @@ public class QuerySortParameter<Q extends BaseQuery<?, ?>, S extends QuerySortBy
   // the javadoc comment for this field is above its getter. This is done to define the type
   // parameter S by overriding that getter and allowing spring-auto-rest-docs to properly detect
   // the type parameter S.
-  @JsonProperty("sort-by")
+  @JsonProperty("sortBy")
   private final List<S> sortBy;
 
   /**
@@ -71,7 +71,7 @@ public class QuerySortParameter<Q extends BaseQuery<?, ?>, S extends QuerySortBy
    *
    * @return the sort values
    */
-  @JsonProperty("sort-by")
+  @JsonProperty("sortBy")
   public List<S> getSortBy() {
     return sortBy;
   }

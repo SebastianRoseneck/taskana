@@ -18,13 +18,13 @@ public class QueryPagingParameter<T, Q extends BaseQuery<T, ?>>
   private final Integer page;
 
   /** Defines the size for each page. This requires a specific requested 'page'. */
-  @JsonProperty("page-size")
+  @JsonProperty("pageSize")
   @Min(1)
   private final Integer pageSize;
 
   @JsonIgnore private PageMetadata pageMetadata;
 
-  @ConstructorProperties({"page", "page-size"})
+  @ConstructorProperties({"page", "pageSize"})
   public QueryPagingParameter(Integer page, Integer pageSize) {
     // TODO: do we really want this? Personally I would throw an InvalidArgumentException
     if (pageSize == null) {
