@@ -1,6 +1,7 @@
 package pro.taskana.workbasket.common.filter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.leangen.graphql.annotations.GraphQLInputField;
 import java.beans.ConstructorProperties;
 import java.util.Optional;
 
@@ -81,16 +82,56 @@ public class WorkbasketQueryFilterParameter implements QueryParameter<Workbasket
     "requiredPermission"
   })
   public WorkbasketQueryFilterParameter(
-      String[] name,
-      String[] nameLike,
-      String[] key,
-      String[] keyLike,
-      String[] owner,
-      String[] ownerLike,
-      String[] descriptionLike,
-      String[] domain,
-      WorkbasketType[] type,
-      WorkbasketPermission requiredPermissions) {
+      @GraphQLInputField(
+              description = "Filter by the name of the workbasket. This is an exact match.")
+          String[] name,
+      @GraphQLInputField(
+              description =
+                  "Filter by the name of the workbasket. This results in a substring search. (% is"
+                      + " appended to the beginning and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] nameLike,
+      @GraphQLInputField(
+              description = "Filter by the key of the workbasket. This is an exact match.")
+          String[] key,
+      @GraphQLInputField(
+              description =
+                  "Filter by the key of the workbasket. This results in a substring search.. (% is"
+                      + " appended to the beginning and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] keyLike,
+      @GraphQLInputField(
+              description = "Filter by the owner of the workbasket. This is an exact match.")
+          String[] owner,
+      @GraphQLInputField(
+              description =
+                  "Filter by the owner of the workbasket. This results in a substring search.. (%"
+                      + " is appended to the beginning and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] ownerLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the description of the workbasket. This results in a substring"
+                      + " search.. (% is appended to the beginning and end of the requested value)."
+                      + " Further SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] descriptionLike,
+      @GraphQLInputField(
+              description = "Filter by the domain of the workbasket. This is an exact match.")
+          String[] domain,
+      @GraphQLInputField(
+              description =
+                  "Filter by the type of the workbasket. This is an exact match.\n"
+                      + "\n"
+                      + "Must be one of [GROUP, PERSONAL, TOPIC, CLEARANCE].")
+          WorkbasketType[] type,
+      @GraphQLInputField(
+              description =
+                  "Filter by the required permission for the workbasket.\n"
+                      + "\n"
+                      + "Must be one of [READ, OPEN, APPEND, TRANSFER, DISTRIBUTE, CUSTOM_1,"
+                      + " CUSTOM_2, CUSTOM_3, CUSTOM_4, CUSTOM_5, CUSTOM_6, CUSTOM_7, CUSTOM_8,"
+                      + " CUSTOM_9, CUSTOM_10, CUSTOM_11, CUSTOM_12].")
+          WorkbasketPermission requiredPermissions) {
     this.name = name;
     this.nameLike = nameLike;
     this.key = key;

@@ -1,24 +1,35 @@
 package pro.taskana.workbasket.common.models;
 
+import io.leangen.graphql.annotations.GraphQLInputField;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.annotations.types.GraphQLType;
+import javax.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;
 
 import pro.taskana.workbasket.api.WorkbasketType;
 import pro.taskana.workbasket.api.models.WorkbasketSummary;
 
 /** EntityModel class for {@link WorkbasketSummary}. */
+@GraphQLType(
+    description =
+        "Workbaskets are the main structure to distribute the tasks to the available users. There"
+            + " are personal, group/team and topic Workbaskets.\n"
+            + "\n"
+            + "This is a specific short model-object which only requires the most important"
+            + " information.")
 public class WorkbasketSummaryRepresentationModel
     extends RepresentationModel<WorkbasketSummaryRepresentationModel> {
 
   /** Unique Id. */
   protected String workbasketId;
   /** the professional key for the workbasket. */
-  protected String key;
+  @NotNull protected String key;
   /** The name of the workbasket. */
-  protected String name;
+  @NotNull protected String name;
   /** The domain the workbasket belongs to. */
-  protected String domain;
+  @NotNull protected String domain;
   /** The type of the workbasket. */
-  protected WorkbasketType type;
+  @NotNull protected WorkbasketType type;
   /** the description of the workbasket. */
   protected String description;
   /**
@@ -49,8 +60,10 @@ public class WorkbasketSummaryRepresentationModel
   /** The fourth Org Level (the lowest one). */
   protected String orgLevel4;
   /** Identifier to tell if this workbasket can be deleted. */
-  private Boolean markedForDeletion;
+  @GraphQLInputField(defaultValue = "false")
+  private boolean markedForDeletion;
 
+  @GraphQLQuery(description = "Unique Id.")
   public String getWorkbasketId() {
     return workbasketId;
   }
@@ -59,6 +72,7 @@ public class WorkbasketSummaryRepresentationModel
     this.workbasketId = workbasketId;
   }
 
+  @GraphQLQuery(description = "The professional key for the workbasket.")
   public String getKey() {
     return key;
   }
@@ -67,6 +81,7 @@ public class WorkbasketSummaryRepresentationModel
     this.key = key;
   }
 
+  @GraphQLQuery(description = "The name of the workbasket.")
   public String getName() {
     return name;
   }
@@ -75,6 +90,7 @@ public class WorkbasketSummaryRepresentationModel
     this.name = name;
   }
 
+  @GraphQLQuery(description = "The domain the workbasket belongs to.")
   public String getDomain() {
     return domain;
   }
@@ -83,6 +99,9 @@ public class WorkbasketSummaryRepresentationModel
     this.domain = domain;
   }
 
+  @GraphQLQuery(
+      description =
+          "The type of the workbasket.\n" + "Must be one of [GROUP, PERSONAL, TOPIC, CLEARANCE].")
   public WorkbasketType getType() {
     return type;
   }
@@ -91,6 +110,7 @@ public class WorkbasketSummaryRepresentationModel
     this.type = type;
   }
 
+  @GraphQLQuery(description = "The description of the workbasket.")
   public String getDescription() {
     return description;
   }
@@ -99,6 +119,10 @@ public class WorkbasketSummaryRepresentationModel
     this.description = description;
   }
 
+  @GraphQLQuery(
+      description =
+          "The owner of the workbasket. The owner is responsible for the on-time completion of all"
+              + " tasks in the workbasket.")
   public String getOwner() {
     return owner;
   }
@@ -107,6 +131,7 @@ public class WorkbasketSummaryRepresentationModel
     this.owner = owner;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"1\".")
   public String getCustom1() {
     return custom1;
   }
@@ -115,6 +140,7 @@ public class WorkbasketSummaryRepresentationModel
     this.custom1 = custom1;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"2\".")
   public String getCustom2() {
     return custom2;
   }
@@ -123,6 +149,7 @@ public class WorkbasketSummaryRepresentationModel
     this.custom2 = custom2;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"3\".")
   public String getCustom3() {
     return custom3;
   }
@@ -131,6 +158,7 @@ public class WorkbasketSummaryRepresentationModel
     this.custom3 = custom3;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"4\".")
   public String getCustom4() {
     return custom4;
   }
@@ -139,6 +167,12 @@ public class WorkbasketSummaryRepresentationModel
     this.custom4 = custom4;
   }
 
+  @GraphQLQuery(
+      description =
+          "The first Org Level (the top one).\n"
+              + "The Org Level is an association with an org hierarchy level in the organization."
+              + " The values are used for monitoring and statistical purposes and should reflect"
+              + " who is responsible of the tasks in the workbasket.")
   public String getOrgLevel1() {
     return orgLevel1;
   }
@@ -147,6 +181,7 @@ public class WorkbasketSummaryRepresentationModel
     this.orgLevel1 = orgLevel1;
   }
 
+  @GraphQLQuery(description = "The second Org Level.")
   public String getOrgLevel2() {
     return orgLevel2;
   }
@@ -155,6 +190,7 @@ public class WorkbasketSummaryRepresentationModel
     this.orgLevel2 = orgLevel2;
   }
 
+  @GraphQLQuery(description = "The third Org Level.")
   public String getOrgLevel3() {
     return orgLevel3;
   }
@@ -163,6 +199,7 @@ public class WorkbasketSummaryRepresentationModel
     this.orgLevel3 = orgLevel3;
   }
 
+  @GraphQLQuery(description = "The fourth Org Level (the lowest one).")
   public String getOrgLevel4() {
     return orgLevel4;
   }
@@ -171,11 +208,12 @@ public class WorkbasketSummaryRepresentationModel
     this.orgLevel4 = orgLevel4;
   }
 
-  public Boolean getMarkedForDeletion() {
+  @GraphQLQuery(description = "Identifier to tell if this workbasket can be deleted.")
+  public boolean getMarkedForDeletion() {
     return markedForDeletion;
   }
 
-  public void setMarkedForDeletion(Boolean markedForDeletion) {
+  public void setMarkedForDeletion(boolean markedForDeletion) {
     this.markedForDeletion = markedForDeletion;
   }
 }

@@ -14,9 +14,9 @@ import pro.taskana.workbasket.api.WorkbasketCustomField;
 import pro.taskana.workbasket.api.WorkbasketService;
 import pro.taskana.workbasket.api.exceptions.WorkbasketNotFoundException;
 import pro.taskana.workbasket.api.models.Workbasket;
+import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
 import pro.taskana.workbasket.internal.models.WorkbasketImpl;
 import pro.taskana.workbasket.rest.WorkbasketController;
-import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
 
 /**
  * Transforms {@link Workbasket} to its resource counterpart {@link WorkbasketRepresentationModel}
@@ -36,6 +36,15 @@ public class WorkbasketRepresentationModelAssembler
   @NonNull
   @Override
   public WorkbasketRepresentationModel toModel(@NonNull Workbasket workbasket) {
+    WorkbasketRepresentationModel repModel = toModelWithoutLinks(workbasket);
+    try {
+      return addLinks(repModel, workbasket);
+    } catch (Exception e) {
+      throw new SystemException("caught unexpected Exception.", e.getCause());
+    }
+  }
+
+  public WorkbasketRepresentationModel toModelWithoutLinks(Workbasket workbasket) {
     WorkbasketRepresentationModel repModel = new WorkbasketRepresentationModel();
     repModel.setWorkbasketId(workbasket.getId());
     repModel.setKey(workbasket.getKey());
@@ -55,11 +64,7 @@ public class WorkbasketRepresentationModelAssembler
     repModel.setOrgLevel4(workbasket.getOrgLevel4());
     repModel.setCreated(workbasket.getCreated());
     repModel.setModified(workbasket.getModified());
-    try {
-      return addLinks(repModel, workbasket);
-    } catch (Exception e) {
-      throw new SystemException("caught unexpected Exception.", e.getCause());
-    }
+    return repModel;
   }
 
   public Workbasket toEntityModel(WorkbasketRepresentationModel repModel) {

@@ -1,6 +1,7 @@
 package pro.taskana.workbasket.common.filter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.leangen.graphql.annotations.GraphQLInputField;
 import java.beans.ConstructorProperties;
 import java.util.Optional;
 
@@ -34,12 +35,26 @@ public class WorkbasketAccessItemQueryFilterParameter
   @JsonProperty("accessIdLike")
   private final String[] accessIdLike;
 
-  @ConstructorProperties({"workbasketKey", "workbasketKeyLike", "access-id", "access-id-like"})
+  @ConstructorProperties({"workbasketKey", "workbasketKeyLike", "accessId", "accessIdLike"})
   public WorkbasketAccessItemQueryFilterParameter(
-      String[] workbasketKey,
-      String[] workbasketKeyLike,
-      String[] accessId,
-      String[] accessIdLike) {
+      @GraphQLInputField(
+              description = "Filter by the key of the workbasket. This is an exact match.")
+          String[] workbasketKey,
+      @GraphQLInputField(
+              description =
+                  "Filter by the key of the workbasket. This results in a substring search.. (% is"
+                      + " appended to the beginning and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] workbasketKeyLike,
+      @GraphQLInputField(
+              description = "Filter by the name of the access id. This is an exact match.")
+          String[] accessId,
+      @GraphQLInputField(
+              description =
+                  "Filter by the name of the access id. This results in a substring search.. (% is"
+                      + " appended to the beginning and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] accessIdLike) {
     this.workbasketKey = workbasketKey;
     this.workbasketKeyLike = workbasketKeyLike;
     this.accessId = accessId;
