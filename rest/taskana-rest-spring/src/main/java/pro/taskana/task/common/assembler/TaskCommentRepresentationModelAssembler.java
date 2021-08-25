@@ -12,10 +12,10 @@ import pro.taskana.common.api.exceptions.SystemException;
 import pro.taskana.common.rest.assembler.CollectionRepresentationModelAssembler;
 import pro.taskana.task.api.TaskService;
 import pro.taskana.task.api.models.TaskComment;
-import pro.taskana.task.internal.models.TaskCommentImpl;
-import pro.taskana.task.rest.TaskCommentController;
 import pro.taskana.task.common.models.TaskCommentCollectionRepresentationModel;
 import pro.taskana.task.common.models.TaskCommentRepresentationModel;
+import pro.taskana.task.internal.models.TaskCommentImpl;
+import pro.taskana.task.rest.TaskCommentController;
 
 /** EntityModel assembler for {@link TaskCommentRepresentationModel}. */
 @Component
@@ -33,13 +33,7 @@ public class TaskCommentRepresentationModelAssembler
   @NonNull
   @Override
   public TaskCommentRepresentationModel toModel(@NonNull TaskComment taskComment) {
-    TaskCommentRepresentationModel repModel = new TaskCommentRepresentationModel();
-    repModel.setTaskCommentId(taskComment.getId());
-    repModel.setTaskId(taskComment.getTaskId());
-    repModel.setTextField(taskComment.getTextField());
-    repModel.setCreator(taskComment.getCreator());
-    repModel.setCreated(taskComment.getCreated());
-    repModel.setModified(taskComment.getModified());
+    TaskCommentRepresentationModel repModel = toModelWithoutLinks(taskComment);
     try {
       repModel.add(
           linkTo(methodOn(TaskCommentController.class).getTaskComment(taskComment.getId()))
@@ -47,6 +41,17 @@ public class TaskCommentRepresentationModelAssembler
     } catch (Exception e) {
       throw new SystemException("caught unexpected Exception.", e.getCause());
     }
+    return repModel;
+  }
+
+  public TaskCommentRepresentationModel toModelWithoutLinks(TaskComment taskComment) {
+    TaskCommentRepresentationModel repModel = new TaskCommentRepresentationModel();
+    repModel.setTaskCommentId(taskComment.getId());
+    repModel.setTaskId(taskComment.getTaskId());
+    repModel.setTextField(taskComment.getTextField());
+    repModel.setCreator(taskComment.getCreator());
+    repModel.setCreated(taskComment.getCreated());
+    repModel.setModified(taskComment.getModified());
     return repModel;
   }
 

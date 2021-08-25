@@ -3,6 +3,7 @@ package pro.taskana.task.common.filter;
 import static pro.taskana.common.internal.util.CheckedConsumer.wrap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.leangen.graphql.annotations.GraphQLInputField;
 import java.beans.ConstructorProperties;
 import java.time.Instant;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public class TaskQueryFilterParameter implements QueryParameter<TaskQuery, Void>
 
   /** Filter by the priority of the task. This is an exact match. */
   @JsonProperty("priority")
-  private final Integer[] priority;
+  private final int[] priority;
 
   /** Filter by the task state. This is an exact match. */
   @JsonProperty("state")
@@ -495,14 +496,14 @@ public class TaskQueryFilterParameter implements QueryParameter<TaskQuery, Void>
   private final String wildcardSearchValue;
 
   /** Filter by the external id of the task. This is an exact match. */
-  @JsonProperty("externalIds")
+  @JsonProperty("externalId")
   private final String[] externalIds;
   /**
    * Filter by the externalId of the task. This results in a substring search (% is appended to the
    * front and end of the requested value). Further SQL "LIKE" wildcard characters will be resolved
    * correctly.
    */
-  @JsonProperty("externalIdsLike")
+  @JsonProperty("externalIdLike")
   private final String[] externalIdsLike;
 
   /** Filter by the value of the field custom1 of the task. This is an exact match. */
@@ -881,125 +882,606 @@ public class TaskQueryFilterParameter implements QueryParameter<TaskQuery, Void>
     "custom16Like"
   })
   public TaskQueryFilterParameter(
-      String[] name,
-      String[] nameLike,
-      Integer[] priority,
-      TaskState[] state,
-      String[] classificationId,
-      String[] classificationKeys,
-      String[] classificationKeysLike,
-      String[] classificationKeysNotIn,
-      Boolean isRead,
-      Boolean isTransferred,
-      ObjectReference[] objectReferences,
-      CallbackState[] callbackStates,
-      String[] attachmentClassificationKeys,
-      String[] attachmentClassificationKeysLike,
-      String[] attachmentClassificationId,
-      String[] attachmentClassificationIdLike,
-      String[] attachmentChannel,
-      String[] attachmentChannelLike,
-      String[] attachmentReference,
-      String[] attachmentReferenceLike,
-      Instant[] attachmentReceived,
-      Instant[] created,
-      Instant createdFrom,
-      Instant createdUntil,
-      Instant[] claimed,
-      Instant[] completed,
-      Instant completedFrom,
-      Instant completedUntil,
-      Instant[] modified,
-      String[] classificationCategories,
-      String[] classificationCategoriesLike,
-      String[] classificationNames,
-      String[] classificationNamesLike,
-      String[] attachmentClassificationNames,
-      String[] attachmentClassificationNamesLike,
-      String[] parentBusinessProcessIds,
-      String[] parentBusinessProcessIdsLike,
-      String[] businessProcessIds,
-      String[] businessProcessIdsLike,
-      String[] taskIds,
-      String[] workbasketIds,
-      String[] workbasketKeys,
-      String domain,
-      String[] owner,
-      String[] ownerLike,
-      String[] creator,
-      String[] creatorLike,
-      String[] noteLike,
-      String[] porCompany,
-      String[] porCompanyLike,
-      String[] porSystem,
-      String[] porSystemLike,
-      String[] porInstance,
-      String[] porInstanceLike,
-      String[] porType,
-      String[] porTypeLike,
-      String[] porValue,
-      String[] porValueLike,
-      Instant[] planned,
-      Instant plannedFrom,
-      Instant plannedUntil,
-      Instant[] received,
-      Instant receivedFrom,
-      Instant receivedUntil,
-      Instant[] due,
-      Instant dueFrom,
-      Instant dueUntil,
-      WildcardSearchField[] wildcardSearchFields,
-      String wildcardSearchValue,
-      String[] externalIds,
-      String[] externalIdsLike,
-      String[] custom1,
-      String[] custom1NotIn,
-      String[] custom1Like,
-      String[] custom2,
-      String[] custom2NotIn,
-      String[] custom2Like,
-      String[] custom3,
-      String[] custom3NotIn,
-      String[] custom3Like,
-      String[] custom4,
-      String[] custom4NotIn,
-      String[] custom4Like,
-      String[] custom5,
-      String[] custom5NotIn,
-      String[] custom5Like,
-      String[] custom6,
-      String[] custom6NotIn,
-      String[] custom6Like,
-      String[] custom7,
-      String[] custom7NotIn,
-      String[] custom7Like,
-      String[] custom8,
-      String[] custom8NotIn,
-      String[] custom8Like,
-      String[] custom9,
-      String[] custom9NotIn,
-      String[] custom9Like,
-      String[] custom10,
-      String[] custom10NotIn,
-      String[] custom10Like,
-      String[] custom11,
-      String[] custom11NotIn,
-      String[] custom11Like,
-      String[] custom12,
-      String[] custom12NotIn,
-      String[] custom12Like,
-      String[] custom13,
-      String[] custom13NotIn,
-      String[] custom13Like,
-      String[] custom14,
-      String[] custom14NotIn,
-      String[] custom14Like,
-      String[] custom15,
-      String[] custom15NotIn,
-      String[] custom15Like,
-      String[] custom16,
-      String[] custom16NotIn,
-      String[] custom16Like)
+      @GraphQLInputField(description = "Filter by the name of the task. This is an exact match.")
+          String[] name,
+      @GraphQLInputField(
+              description =
+                  "Filter by the name of the task. This results in a substring search (% is"
+                      + " appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] nameLike,
+      @GraphQLInputField(
+              description = "Filter by the priority of the task. This is an exact match.")
+          int[] priority,
+      @GraphQLInputField(
+              description =
+                  "Filter by the task state. This is an exact match.\n"
+                      + "\n"
+                      + "Must be one of [READY, CLAIMED, COMPLETED, CANCELLED, TERMINATED].")
+          TaskState[] state,
+      @GraphQLInputField(
+              description = "Filter by the classification id of the task. This is an exact match.")
+          String[] classificationId,
+      @GraphQLInputField(
+              description = "Filter by the classification key of the task. This is an exact match.")
+          String[] classificationKeys,
+      @GraphQLInputField(
+              description =
+                  "Filter by the classification key of the task. This results in a substring search"
+                      + " (% is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] classificationKeysLike,
+      @GraphQLInputField(
+              description = "Filter by the classification key of the task. This is an exact match.")
+          String[] classificationKeysNotIn,
+      @GraphQLInputField(
+              description = "Filter by the is read flag of the task. This is an exact match.")
+          Boolean isRead,
+      @GraphQLInputField(
+              description =
+                  "Filter by the is transferred flag of the task. This is an exact match.")
+          Boolean isTransferred,
+      @GraphQLInputField(
+              description =
+                  "Filter by the primary object reference of the task. This is an exact match.")
+          ObjectReference[] objectReferences,
+      @GraphQLInputField(
+              description =
+                  "Filter by the callback state of the task. This is an exact match.\n"
+                      + "\n"
+                      + "Must be one of [NONE, CALLBACK_PROCESSING_REQUIRED, CLAIMED,"
+                      + " CALLBACK_PROCESSING_COMPLETED].")
+          CallbackState[] callbackStates,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment classification key of the task. This is an exact"
+                      + " match.")
+          String[] attachmentClassificationKeys,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment classification key of the task. This results in a"
+                      + " substring search (% is appended to the front and end of the requested"
+                      + " value). Further SQL \"LIKE\" wildcard characters will be resolved"
+                      + " correctly.")
+          String[] attachmentClassificationKeysLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment classification id of the task. This is an exact match.")
+          String[] attachmentClassificationId,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment classification id of the task. This results in a"
+                      + " substring search (% is appended to the front and end of the requested"
+                      + " value). Further SQL \"LIKE\" wildcard characters will be resolved"
+                      + " correctly.")
+          String[] attachmentClassificationIdLike,
+      @GraphQLInputField(
+              description = "Filter by the attachment channel of the task. This is an exact match.")
+          String[] attachmentChannel,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment channel of the task. This results in a substring search"
+                      + " (% is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] attachmentChannelLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment reference of the task. This is an exact match.")
+          String[] attachmentReference,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment reference of the task. This results in a substring"
+                      + " search (% is appended to the front and end of the requested value)."
+                      + " Further SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] attachmentReferenceLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the attachment of the task was received."
+                      + " To create an open interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.")
+          Instant[] attachmentReceived,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was created. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.")
+          Instant[] created,
+      @GraphQLInputField(
+              description =
+                  "Filter since a given created timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'created'.")
+          Instant createdFrom,
+      @GraphQLInputField(
+              description =
+                  "Filter until a given created timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'created'.")
+          Instant createdUntil,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was claimed. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.")
+          Instant[] claimed,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was completed. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.")
+          Instant[] completed,
+      @GraphQLInputField(
+              description =
+                  "Filter since a given completed timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'completed'.")
+          Instant completedFrom,
+      @GraphQLInputField(
+              description =
+                  "Filter until a given completed timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'completed'.")
+          Instant completedUntil,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was modified. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.")
+          Instant[] modified,
+      @GraphQLInputField(
+              description =
+                  "Filter by the classification category of the task. This is an exact match.")
+          String[] classificationCategories,
+      @GraphQLInputField(
+              description =
+                  "Filter by the classification category of the task. This results in a substring"
+                      + " search (% is appended to the front and end of the requested value)."
+                      + " Further SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] classificationCategoriesLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the classification name of the task. This is an exact match.")
+          String[] classificationNames,
+      @GraphQLInputField(
+              description =
+                  "Filter by the classification name of the task. This results in a substring"
+                      + " search (% is appended to the front and end of the requested value)."
+                      + " Further SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] classificationNamesLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment classification name of the task. This is an exact"
+                      + " match.")
+          String[] attachmentClassificationNames,
+      @GraphQLInputField(
+              description =
+                  "Filter by the attachment classification name of the task. This results in a"
+                      + " substring search (% is appended to the front and end of the requested"
+                      + " value). Further SQL \"LIKE\" wildcard characters will be resolved"
+                      + " correctly.")
+          String[] attachmentClassificationNamesLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the parent business process id of the task. This is an exact match.")
+          String[] parentBusinessProcessIds,
+      @GraphQLInputField(
+              description =
+                  "Filter by the parent business process id of the task. This results in a"
+                      + " substring search (% is appended to the front and end of the requested"
+                      + " value). Further SQL \"LIKE\" wildcard characters will be resolved"
+                      + " correctly.")
+          String[] parentBusinessProcessIdsLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the business process id of the task. This is an exact match.")
+          String[] businessProcessIds,
+      @GraphQLInputField(
+              description =
+                  "Filter by the business process id of the task. This results in a substring"
+                      + " search (% is appended to the front and end of the requested value)."
+                      + " Further SQL \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] businessProcessIdsLike,
+      @GraphQLInputField(description = "Filter by task id. This is an exact match.")
+          String[] taskIds,
+      @GraphQLInputField(
+              description = "Filter by workbasket id of the task. This is an exact match.")
+          String[] workbasketIds,
+      @GraphQLInputField(
+              description =
+                  "Filter by workbasket keys of the task. This parameter can only be used in"
+                      + " combination with 'domain'.")
+          String[] workbasketKeys,
+      @GraphQLInputField(description = "Filter by domain of the task. This is an exact match.")
+          String domain,
+      @GraphQLInputField(description = "Filter by owner of the task. This is an exact match.")
+          String[] owner,
+      @GraphQLInputField(
+              description =
+                  "Filter by the owner of the task. This results in a substring search (% is"
+                      + " appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] ownerLike,
+      @GraphQLInputField(description = "Filter by creator of the task. This is an exact match.")
+          String[] creator,
+      @GraphQLInputField(
+              description =
+                  "Filter by the creator of the task. This results in a substring search (% is"
+                      + " appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] creatorLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the note of the task. This results in a substring search (% is"
+                      + " appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] noteLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the company of the primary object reference of the task. This is an"
+                      + " exact match.")
+          String[] porCompany,
+      @GraphQLInputField(
+              description =
+                  "Filter by the company of the primary object reference of the task. This results"
+                      + " in a substring search (% is appended to the front and end of the"
+                      + " requested value). Further SQL \"LIKE\" wildcard characters will be"
+                      + " resolved correctly.")
+          String[] porCompanyLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the system of the primary object reference of the task. This is an"
+                      + " exact match.")
+          String[] porSystem,
+      @GraphQLInputField(
+              description =
+                  "Filter by the he system of the primary object reference of the task. This"
+                      + " results in a substring search (% is appended to the front and end of the"
+                      + " requested value). Further SQL \"LIKE\" wildcard characters will be"
+                      + " resolved correctly.")
+          String[] porSystemLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the system instance of the primary object reference of the task. This"
+                      + " is an exact match.")
+          String[] porInstance,
+      @GraphQLInputField(
+              description =
+                  "Filter by the system instance of the primary object reference of the task. This"
+                      + " results in a substring search (% is appended to the front and end of the"
+                      + " requested value). Further SQL \"LIKE\" wildcard characters will be"
+                      + " resolved correctly.")
+          String[] porInstanceLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the type of the primary object reference of the task. This is an exact"
+                      + " match.")
+          String[] porType,
+      @GraphQLInputField(
+              description =
+                  "Filter by the type of the primary object reference of the task. This results in"
+                      + " a substring search (% is appended to the front and end of the requested"
+                      + " value). Further SQL \"LIKE\" wildcard characters will be resolved"
+                      + " correctly.")
+          String[] porTypeLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the primary object reference of the task. This is an"
+                      + " exact match.")
+          String[] porValue,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the primary object reference of the task. This results in"
+                      + " a substring search (% is appended to the front and end of the requested"
+                      + " value). Further SQL \"LIKE\" wildcard characters will be resolved"
+                      + " correctly.")
+          String[] porValueLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was planned. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'planned-from' or"
+                      + " 'planned-until'.")
+          Instant[] planned,
+      @GraphQLInputField(
+              description =
+                  "Filter since a given planned timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'planned'.")
+          Instant plannedFrom,
+      @GraphQLInputField(
+              description =
+                  "Filter until a given planned timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'planned'.")
+          Instant plannedUntil,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was received. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'received-from' or"
+                      + " 'received-until'.")
+          Instant[] received,
+      @GraphQLInputField(
+              description =
+                  "Filter since a given received timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'received'.")
+          Instant receivedFrom,
+      @GraphQLInputField(
+              description =
+                  "Filter until a given received timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'received'.")
+          Instant receivedUntil,
+      @GraphQLInputField(
+              description =
+                  "Filter by a time interval within which the task was due. To create an open"
+                      + " interval you can just leave it blank.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'due-from' or 'due-until'.")
+          Instant[] due,
+      @GraphQLInputField(
+              description =
+                  "Filter since a given due timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'due'.")
+          Instant dueFrom,
+      @GraphQLInputField(
+              description =
+                  "Filter until a given due timestamp.\n"
+                      + "\n"
+                      + "The format is ISO-8601.\n"
+                      + "\n"
+                      + "This parameter can’t be used together with 'due'.")
+          Instant dueUntil,
+      @GraphQLInputField(
+              description =
+                  "Filter by wildcard search field of the task.\n"
+                      + "\n"
+                      + "This must be used in combination with 'wildcard-search-value'.\n"
+                      + "\n"
+                      + "Must be one of [NAME, DESCRIPTION, CUSTOM_1, CUSTOM_2, CUSTOM_3, CUSTOM_4,"
+                      + " CUSTOM_5, CUSTOM_6, CUSTOM_7, CUSTOM_8, CUSTOM_9, CUSTOM_10, CUSTOM_11,"
+                      + " CUSTOM_12, CUSTOM_13, CUSTOM_14, CUSTOM_15, CUSTOM_16].")
+          WildcardSearchField[] wildcardSearchFields,
+      @GraphQLInputField(
+              description =
+                  "Filter by wildcard search field of the task. This is an exact match.\n"
+                      + "\n"
+                      + "This must be used in combination with 'wildcard-search-value'.")
+          String wildcardSearchValue,
+      @GraphQLInputField(
+              description = "Filter by the external id of the task. This is an exact match.")
+          String[] externalIds,
+      @GraphQLInputField(
+              description =
+                  "Filter by the externalId of the task. This results in a substring search (% is"
+                      + " appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] externalIdsLike,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom1 of the task. This is an exact match.")
+          String[] custom1,
+      @GraphQLInputField(description = "Exclude values of the field custom1 of the task.")
+          String[] custom1NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom1 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom1Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom2 of the task. This is an exact match.")
+          String[] custom2,
+      @GraphQLInputField(description = "Exclude values of the field custom2 of the task.")
+          String[] custom2NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom2 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom2Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom3 of the task. This is an exact match.")
+          String[] custom3,
+      @GraphQLInputField(description = "Exclude values of the field custom3 of the task.")
+          String[] custom3NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom3 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom3Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom4 of the task. This is an exact match.")
+          String[] custom4,
+      @GraphQLInputField(description = "Exclude values of the field custom4 of the task.")
+          String[] custom4NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom4 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom4Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom5 of the task. This is an exact match.")
+          String[] custom5,
+      @GraphQLInputField(description = "Exclude values of the field custom5 of the task.")
+          String[] custom5NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom5 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom5Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom6 of the task. This is an exact match.")
+          String[] custom6,
+      @GraphQLInputField(description = "Exclude values of the field custom6 of the task.")
+          String[] custom6NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom6 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom6Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom7 of the task. This is an exact match.")
+          String[] custom7,
+      @GraphQLInputField(description = "Exclude values of the field custom7 of the task.")
+          String[] custom7NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom7 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom7Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom8 of the task. This is an exact match.")
+          String[] custom8,
+      @GraphQLInputField(description = "Exclude values of the field custom8 of the task.")
+          String[] custom8NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom8 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom8Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom9 of the task. This is an exact match.")
+          String[] custom9,
+      @GraphQLInputField(description = "Exclude values of the field custom9 of the task.")
+          String[] custom9NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom9 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom9Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom10 of the task. This is an exact match.")
+          String[] custom10,
+      @GraphQLInputField(description = "Exclude values of the field custom10 of the task.")
+          String[] custom10NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom10 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom10Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom11 of the task. This is an exact match.")
+          String[] custom11,
+      @GraphQLInputField(description = "Exclude values of the field custom11 of the task.")
+          String[] custom11NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom11 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom11Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom12 of the task. This is an exact match.")
+          String[] custom12,
+      @GraphQLInputField(description = "Exclude values of the field custom12 of the task.")
+          String[] custom12NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom12 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom12Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom13 of the task. This is an exact match.")
+          String[] custom13,
+      @GraphQLInputField(description = "Exclude values of the field custom13 of the task.")
+          String[] custom13NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom13 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom13Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom14 of the task. This is an exact match.")
+          String[] custom14,
+      @GraphQLInputField(description = "Exclude values of the field custom14 of the task.")
+          String[] custom14NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom14 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom14Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom15 of the task. This is an exact match.")
+          String[] custom15,
+      @GraphQLInputField(description = "Exclude values of the field custom15 of the task.")
+          String[] custom15NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom15 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom15Like,
+      @GraphQLInputField(
+              description =
+                  "Filter by the value of the field custom16 of the task. This is an exact match.")
+          String[] custom16,
+      @GraphQLInputField(description = "Exclude values of the field custom16 of the task.")
+          String[] custom16NotIn,
+      @GraphQLInputField(
+              description =
+                  "Filter by the custom16 field of the task. This results in a substring search (%"
+                      + " is appended to the front and end of the requested value). Further SQL"
+                      + " \"LIKE\" wildcard characters will be resolved correctly.")
+          String[] custom16Like)
       throws InvalidArgumentException {
     this.name = name;
     this.nameLike = nameLike;

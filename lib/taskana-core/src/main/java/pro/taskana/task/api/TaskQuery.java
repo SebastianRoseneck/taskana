@@ -90,7 +90,7 @@ public interface TaskQuery extends BaseQuery<TaskSummary, TaskQueryColumnName> {
    * @param priorities as a integer
    * @return the query
    */
-  TaskQuery priorityIn(Integer... priorities);
+  TaskQuery priorityIn(int... priorities);
 
   /**
    * Add your state to your query.

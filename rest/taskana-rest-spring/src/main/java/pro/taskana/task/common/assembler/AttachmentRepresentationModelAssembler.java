@@ -37,6 +37,12 @@ public class AttachmentRepresentationModelAssembler
   @NonNull
   @Override
   public AttachmentRepresentationModel toModel(@NonNull Attachment attachment) {
+    AttachmentRepresentationModel repModel = toModelWithoutLinks(attachment);
+    repModel.add(linkTo(AttachmentController.class).slash(attachment.getId()).withSelfRel());
+    return repModel;
+  }
+
+  public AttachmentRepresentationModel toModelWithoutLinks(Attachment attachment) {
     AttachmentRepresentationModel repModel = new AttachmentRepresentationModel();
     repModel.setAttachmentId(attachment.getId());
     repModel.setTaskId(attachment.getTaskId());
@@ -48,7 +54,6 @@ public class AttachmentRepresentationModelAssembler
     repModel.setObjectReference(objectReferenceAssembler.toModel(attachment.getObjectReference()));
     repModel.setChannel(attachment.getChannel());
     repModel.setCustomAttributes(attachment.getCustomAttributeMap());
-    repModel.add(linkTo(AttachmentController.class).slash(attachment.getId()).withSelfRel());
     return repModel;
   }
 

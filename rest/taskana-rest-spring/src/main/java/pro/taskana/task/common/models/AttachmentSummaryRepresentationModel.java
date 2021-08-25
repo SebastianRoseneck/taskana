@@ -1,5 +1,7 @@
 package pro.taskana.task.common.models;
 
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.annotations.types.GraphQLType;
 import java.time.Instant;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -7,6 +9,11 @@ import pro.taskana.classification.common.models.ClassificationSummaryRepresentat
 import pro.taskana.task.api.models.AttachmentSummary;
 
 /** EntityModel class for {@link AttachmentSummary}. */
+@GraphQLType(
+    description =
+        "An Attachment offers the possibility of providing  further information to Tasks. \n"
+            + "This is a specific short model-object which only requires the most important"
+            + " information.")
 public class AttachmentSummaryRepresentationModel
     extends RepresentationModel<AttachmentSummaryRepresentationModel> {
 
@@ -27,6 +34,7 @@ public class AttachmentSummaryRepresentationModel
   /** Determines on which channel this attachment was received. */
   protected String channel;
 
+  @GraphQLQuery(description = "Unique Id.")
   public String getAttachmentId() {
     return attachmentId;
   }
@@ -35,6 +43,7 @@ public class AttachmentSummaryRepresentationModel
     this.attachmentId = attachmentId;
   }
 
+  @GraphQLQuery(description = "The referenced task id.")
   public String getTaskId() {
     return taskId;
   }
@@ -43,6 +52,7 @@ public class AttachmentSummaryRepresentationModel
     this.taskId = taskId;
   }
 
+  @GraphQLQuery(description = "The creation timestamp in the system.")
   public Instant getCreated() {
     return created;
   }
@@ -51,6 +61,7 @@ public class AttachmentSummaryRepresentationModel
     this.created = created;
   }
 
+  @GraphQLQuery(description = "The timestamp of the last modification.")
   public Instant getModified() {
     return modified;
   }
@@ -59,6 +70,7 @@ public class AttachmentSummaryRepresentationModel
     this.modified = modified;
   }
 
+  @GraphQLQuery(description = "The timestamp of the entry date.")
   public Instant getReceived() {
     return received;
   }
@@ -67,6 +79,7 @@ public class AttachmentSummaryRepresentationModel
     this.received = received;
   }
 
+  @GraphQLQuery(description = "The classification of this attachment.")
   public ClassificationSummaryRepresentationModel getClassificationSummary() {
     return classificationSummary;
   }
@@ -76,6 +89,7 @@ public class AttachmentSummaryRepresentationModel
     this.classificationSummary = classificationSummary;
   }
 
+  @GraphQLQuery(description = "The Objects primary ObjectReference.")
   public ObjectReferenceRepresentationModel getObjectReference() {
     return objectReference;
   }
@@ -84,6 +98,7 @@ public class AttachmentSummaryRepresentationModel
     this.objectReference = objectReference;
   }
 
+  @GraphQLQuery(description = "Determines on which channel this attachment was received.")
   public String getChannel() {
     return channel;
   }

@@ -1,11 +1,14 @@
 package pro.taskana.task.common.models;
 
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.annotations.types.GraphQLType;
 import java.time.Instant;
 import org.springframework.hateoas.RepresentationModel;
 
 import pro.taskana.task.api.models.TaskComment;
 
 /** EntityModel class for {@link TaskComment}. */
+@GraphQLType(description = "Representing a comment in a Task.")
 public class TaskCommentRepresentationModel
     extends RepresentationModel<TaskCommentRepresentationModel> {
 
@@ -22,6 +25,7 @@ public class TaskCommentRepresentationModel
   /** Timestamp of the last task comment modification. */
   private Instant modified;
 
+  @GraphQLQuery(description = "Unique Id.")
   public String getTaskCommentId() {
     return taskCommentId;
   }
@@ -30,6 +34,7 @@ public class TaskCommentRepresentationModel
     this.taskCommentId = taskCommentId;
   }
 
+  @GraphQLQuery(description = "Task Id. Can identify the task the comment belongs to.")
   public String getTaskId() {
     return taskId;
   }
@@ -38,6 +43,7 @@ public class TaskCommentRepresentationModel
     this.taskId = taskId;
   }
 
+  @GraphQLQuery(description = "The content of the comment.")
   public String getTextField() {
     return textField;
   }
@@ -46,6 +52,7 @@ public class TaskCommentRepresentationModel
     this.textField = textField;
   }
 
+  @GraphQLQuery(description = "The creator of the task comment.")
   public String getCreator() {
     return creator;
   }
@@ -54,6 +61,7 @@ public class TaskCommentRepresentationModel
     this.creator = creator;
   }
 
+  @GraphQLQuery(description = "The creation timestamp in the system.")
   public Instant getCreated() {
     return created;
   }
@@ -62,6 +70,7 @@ public class TaskCommentRepresentationModel
     this.created = created;
   }
 
+  @GraphQLQuery(description = "Timestamp of the last task comment modification.")
   public Instant getModified() {
     return modified;
   }

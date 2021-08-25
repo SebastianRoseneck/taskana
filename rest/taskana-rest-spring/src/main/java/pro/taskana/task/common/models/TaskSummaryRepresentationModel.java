@@ -1,5 +1,7 @@
 package pro.taskana.task.common.models;
 
+import io.leangen.graphql.annotations.GraphQLInputField;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.annotations.types.GraphQLType;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -59,7 +61,8 @@ public class TaskSummaryRepresentationModel
   /** The description of the task. */
   protected String description;
   /** The priority of the task. */
-  @NotNull protected Integer priority;
+  @GraphQLInputField(defaultValue = "0")
+  protected int priority;
   /** The current task state. */
   protected TaskState state;
   /** The classification of this task. */
@@ -75,9 +78,11 @@ public class TaskSummaryRepresentationModel
   /** The Objects primary ObjectReference. */
   @NotNull protected ObjectReferenceRepresentationModel primaryObjRef;
   /** Indicator if the task has been read. */
-  protected Boolean isRead;
+  @GraphQLInputField(defaultValue = "false")
+  protected boolean isRead;
   /** Indicator if the task has been transferred. */
-  protected Boolean isTransferred;
+  @GraphQLInputField(defaultValue = "false")
+  protected boolean isTransferred;
   /** A custom property with name "1". */
   protected String custom1;
   /** A custom property with name "2". */
@@ -114,6 +119,7 @@ public class TaskSummaryRepresentationModel
   /** The attachment summaries of this task. */
   private List<AttachmentSummaryRepresentationModel> attachmentSummaries = new ArrayList<>();
 
+  @GraphQLQuery(description = "Unique Id.")
   public String getTaskId() {
     return taskId;
   }
@@ -122,6 +128,10 @@ public class TaskSummaryRepresentationModel
     this.taskId = taskId;
   }
 
+  @GraphQLQuery(
+      description =
+          "External Id. Can be used to enforce idempotence at task creation. Can identify an"
+              + " external task.")
   public String getExternalId() {
     return externalId;
   }
@@ -130,6 +140,7 @@ public class TaskSummaryRepresentationModel
     this.externalId = externalId;
   }
 
+  @GraphQLQuery(description = "The creation timestamp in the system.")
   public Instant getCreated() {
     return created;
   }
@@ -138,6 +149,7 @@ public class TaskSummaryRepresentationModel
     this.created = created;
   }
 
+  @GraphQLQuery(description = "The timestamp of the last claim-operation.")
   public Instant getClaimed() {
     return claimed;
   }
@@ -146,6 +158,7 @@ public class TaskSummaryRepresentationModel
     this.claimed = claimed;
   }
 
+  @GraphQLQuery(description = "The timestamp of the completion.")
   public Instant getCompleted() {
     return completed;
   }
@@ -154,6 +167,7 @@ public class TaskSummaryRepresentationModel
     this.completed = completed;
   }
 
+  @GraphQLQuery(description = "The timestamp of the last modification.")
   public Instant getModified() {
     return modified;
   }
@@ -162,6 +176,10 @@ public class TaskSummaryRepresentationModel
     this.modified = modified;
   }
 
+  @GraphQLQuery(
+      description =
+          "Planned start of the task. The actual completion of the task should be between PLANNED"
+              + " and DUE.")
   public Instant getPlanned() {
     return planned;
   }
@@ -170,6 +188,10 @@ public class TaskSummaryRepresentationModel
     this.planned = planned;
   }
 
+  @GraphQLQuery(
+      description =
+          "Timestamp when the task has been received. It notes when the surrounding process started"
+              + " and not just when the actual task was created.")
   public Instant getReceived() {
     return received;
   }
@@ -178,6 +200,10 @@ public class TaskSummaryRepresentationModel
     this.received = received;
   }
 
+  @GraphQLQuery(
+      description =
+          "Timestamp when the task is due. The actual completion of the task should be between"
+              + " PLANNED and DUE.")
   public Instant getDue() {
     return due;
   }
@@ -186,6 +212,7 @@ public class TaskSummaryRepresentationModel
     this.due = due;
   }
 
+  @GraphQLQuery(description = "The name of the task.")
   public String getName() {
     return name;
   }
@@ -194,6 +221,7 @@ public class TaskSummaryRepresentationModel
     this.name = name;
   }
 
+  @GraphQLQuery(description = "The creator of the task.")
   public String getCreator() {
     return creator;
   }
@@ -202,6 +230,7 @@ public class TaskSummaryRepresentationModel
     this.creator = creator;
   }
 
+  @GraphQLQuery(description = "Note.")
   public String getNote() {
     return note;
   }
@@ -210,6 +239,7 @@ public class TaskSummaryRepresentationModel
     this.note = note;
   }
 
+  @GraphQLQuery(description = "The description of the task.")
   public String getDescription() {
     return description;
   }
@@ -218,14 +248,20 @@ public class TaskSummaryRepresentationModel
     this.description = description;
   }
 
-  public Integer getPriority() {
+  @GraphQLQuery(description = "The priority of the task.")
+  public int getPriority() {
     return priority;
   }
 
-  public void setPriority(Integer priority) {
+  public void setPriority(int priority) {
     this.priority = priority;
   }
 
+  @GraphQLQuery(
+      description =
+          "The current task state.\n"
+              + "\n"
+              + "Must be one of [READY, CLAIMED, COMPLETED, CANCELLED, TERMINATED].")
   public TaskState getState() {
     return state;
   }
@@ -234,6 +270,7 @@ public class TaskSummaryRepresentationModel
     this.state = state;
   }
 
+  @GraphQLQuery(description = "The classification of this task.")
   public ClassificationSummaryRepresentationModel getClassificationSummary() {
     return classificationSummary;
   }
@@ -243,6 +280,7 @@ public class TaskSummaryRepresentationModel
     this.classificationSummary = classificationSummary;
   }
 
+  @GraphQLQuery(description = "The workbasket this task resides in.")
   public WorkbasketSummaryRepresentationModel getWorkbasketSummary() {
     return workbasketSummary;
   }
@@ -251,6 +289,7 @@ public class TaskSummaryRepresentationModel
     this.workbasketSummary = workbasketSummary;
   }
 
+  @GraphQLQuery(description = "The business process id.")
   public String getBusinessProcessId() {
     return businessProcessId;
   }
@@ -259,6 +298,7 @@ public class TaskSummaryRepresentationModel
     this.businessProcessId = businessProcessId;
   }
 
+  @GraphQLQuery(description = "The parent business process id.")
   public String getParentBusinessProcessId() {
     return parentBusinessProcessId;
   }
@@ -267,6 +307,7 @@ public class TaskSummaryRepresentationModel
     this.parentBusinessProcessId = parentBusinessProcessId;
   }
 
+  @GraphQLQuery(description = "The owner of the task. The owner is set upon claiming of the task.")
   public String getOwner() {
     return owner;
   }
@@ -275,6 +316,7 @@ public class TaskSummaryRepresentationModel
     this.owner = owner;
   }
 
+  @GraphQLQuery(description = "The Objects primary ObjectReference.")
   public ObjectReferenceRepresentationModel getPrimaryObjRef() {
     return primaryObjRef;
   }
@@ -283,6 +325,7 @@ public class TaskSummaryRepresentationModel
     this.primaryObjRef = primaryObjRef;
   }
 
+  @GraphQLQuery(description = "Indicator if the task has been read.")
   public Boolean isRead() {
     return isRead;
   }
@@ -291,6 +334,7 @@ public class TaskSummaryRepresentationModel
     this.isRead = isRead;
   }
 
+  @GraphQLQuery(description = "Indicator if the task has been transferred.")
   public Boolean isTransferred() {
     return isTransferred;
   }
@@ -299,6 +343,7 @@ public class TaskSummaryRepresentationModel
     this.isTransferred = isTransferred;
   }
 
+  @GraphQLQuery(description = "Attachments of the task.")
   public List<AttachmentSummaryRepresentationModel> getAttachmentSummaries() {
     return attachmentSummaries;
   }
@@ -308,6 +353,7 @@ public class TaskSummaryRepresentationModel
     this.attachmentSummaries = attachmentSummaries;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"1\".")
   public String getCustom1() {
     return custom1;
   }
@@ -316,6 +362,7 @@ public class TaskSummaryRepresentationModel
     this.custom1 = custom1;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"2\".")
   public String getCustom2() {
     return custom2;
   }
@@ -324,6 +371,7 @@ public class TaskSummaryRepresentationModel
     this.custom2 = custom2;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"3\".")
   public String getCustom3() {
     return custom3;
   }
@@ -332,6 +380,7 @@ public class TaskSummaryRepresentationModel
     this.custom3 = custom3;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"4\".")
   public String getCustom4() {
     return custom4;
   }
@@ -340,6 +389,7 @@ public class TaskSummaryRepresentationModel
     this.custom4 = custom4;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"5\".")
   public String getCustom5() {
     return custom5;
   }
@@ -348,6 +398,7 @@ public class TaskSummaryRepresentationModel
     this.custom5 = custom5;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"6\".")
   public String getCustom6() {
     return custom6;
   }
@@ -356,6 +407,7 @@ public class TaskSummaryRepresentationModel
     this.custom6 = custom6;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"7\".")
   public String getCustom7() {
     return custom7;
   }
@@ -364,6 +416,7 @@ public class TaskSummaryRepresentationModel
     this.custom7 = custom7;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"8\".")
   public String getCustom8() {
     return custom8;
   }
@@ -372,6 +425,7 @@ public class TaskSummaryRepresentationModel
     this.custom8 = custom8;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"9\".")
   public String getCustom9() {
     return custom9;
   }
@@ -380,6 +434,7 @@ public class TaskSummaryRepresentationModel
     this.custom9 = custom9;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"10\".")
   public String getCustom10() {
     return custom10;
   }
@@ -388,6 +443,7 @@ public class TaskSummaryRepresentationModel
     this.custom10 = custom10;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"11\".")
   public String getCustom11() {
     return custom11;
   }
@@ -396,6 +452,7 @@ public class TaskSummaryRepresentationModel
     this.custom11 = custom11;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"12\".")
   public String getCustom12() {
     return custom12;
   }
@@ -404,6 +461,7 @@ public class TaskSummaryRepresentationModel
     this.custom12 = custom12;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"13\".")
   public String getCustom13() {
     return custom13;
   }
@@ -412,6 +470,7 @@ public class TaskSummaryRepresentationModel
     this.custom13 = custom13;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"14\".")
   public String getCustom14() {
     return custom14;
   }
@@ -420,6 +479,7 @@ public class TaskSummaryRepresentationModel
     this.custom14 = custom14;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"15\".")
   public String getCustom15() {
     return custom15;
   }
@@ -428,6 +488,7 @@ public class TaskSummaryRepresentationModel
     this.custom15 = custom15;
   }
 
+  @GraphQLQuery(description = "A custom property with name \"16\".")
   public String getCustom16() {
     return custom16;
   }

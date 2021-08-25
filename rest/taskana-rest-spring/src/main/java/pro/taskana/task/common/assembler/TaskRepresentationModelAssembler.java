@@ -16,10 +16,10 @@ import pro.taskana.common.api.exceptions.SystemException;
 import pro.taskana.task.api.TaskCustomField;
 import pro.taskana.task.api.TaskService;
 import pro.taskana.task.api.models.Task;
-import pro.taskana.task.internal.models.TaskImpl;
-import pro.taskana.task.rest.TaskController;
 import pro.taskana.task.common.models.TaskRepresentationModel;
 import pro.taskana.task.common.models.TaskRepresentationModel.CustomAttribute;
+import pro.taskana.task.graphql.resolvers.TaskResolver;
+import pro.taskana.task.internal.models.TaskImpl;
 import pro.taskana.workbasket.common.assembler.WorkbasketSummaryRepresentationModelAssembler;
 
 /** EntityModel assembler for {@link TaskRepresentationModel}. */
@@ -50,6 +50,16 @@ public class TaskRepresentationModelAssembler
   @NonNull
   @Override
   public TaskRepresentationModel toModel(@NonNull Task task) {
+    TaskRepresentationModel repModel = toModelWithoutLinks(task);
+    try {
+      repModel.add(linkTo(methodOn(TaskResolver.class).getTask(task.getId())).withSelfRel());
+    } catch (Exception e) {
+      throw new SystemException("caught unexpected Exception.", e.getCause());
+    }
+    return repModel;
+  }
+
+  public TaskRepresentationModel toModelWithoutLinks(Task task) {
     TaskRepresentationModel repModel = new TaskRepresentationModel();
     repModel.setTaskId(task.getId());
     repModel.setExternalId(task.getExternalId());
@@ -103,11 +113,6 @@ public class TaskRepresentationModelAssembler
     repModel.setCustom14(task.getCustomAttribute(TaskCustomField.CUSTOM_14));
     repModel.setCustom15(task.getCustomAttribute(TaskCustomField.CUSTOM_15));
     repModel.setCustom16(task.getCustomAttribute(TaskCustomField.CUSTOM_16));
-    try {
-      repModel.add(linkTo(methodOn(TaskController.class).getTask(task.getId())).withSelfRel());
-    } catch (Exception e) {
-      throw new SystemException("caught unexpected Exception.", e.getCause());
-    }
     return repModel;
   }
 

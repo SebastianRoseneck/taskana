@@ -1,7 +1,13 @@
 package pro.taskana.task.common.models;
 
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.annotations.types.GraphQLType;
 import org.springframework.hateoas.RepresentationModel;
 
+@GraphQLType(
+    description =
+        "Every Task and Attachment in Taskana must be linked to a real subject (e.g. a specific"
+            + " claim). This link is implemented by the ObjectReference.")
 public class ObjectReferenceRepresentationModel
     extends RepresentationModel<ObjectReferenceRepresentationModel> {
 
@@ -18,6 +24,7 @@ public class ObjectReferenceRepresentationModel
   /** The value of the primary object reference. */
   private String value;
 
+  @GraphQLQuery(description = "Unique ID.")
   public String getId() {
     return id;
   }
@@ -26,6 +33,7 @@ public class ObjectReferenceRepresentationModel
     this.id = id;
   }
 
+  @GraphQLQuery(description = "The company the referenced primary object belongs to.")
   public String getCompany() {
     return company;
   }
@@ -34,6 +42,10 @@ public class ObjectReferenceRepresentationModel
     this.company = company;
   }
 
+  @GraphQLQuery(
+      description =
+          "The (kind of) system, the referenced primary object resides in (e.g. SAP, MySystem A,"
+              + " ...).")
   public String getSystem() {
     return system;
   }
@@ -42,6 +54,8 @@ public class ObjectReferenceRepresentationModel
     this.system = system;
   }
 
+  @GraphQLQuery(
+      description = "The instance of the system where the referenced primary object is located.")
   public String getSystemInstance() {
     return systemInstance;
   }
@@ -50,6 +64,9 @@ public class ObjectReferenceRepresentationModel
     this.systemInstance = systemInstance;
   }
 
+  @GraphQLQuery(
+      description =
+          "The type of the referenced primary object (contract, claim, policy, customer,...).")
   public String getType() {
     return type;
   }
@@ -58,6 +75,7 @@ public class ObjectReferenceRepresentationModel
     this.type = type;
   }
 
+  @GraphQLQuery(description = "The value of the primary object reference.")
   public String getValue() {
     return value;
   }

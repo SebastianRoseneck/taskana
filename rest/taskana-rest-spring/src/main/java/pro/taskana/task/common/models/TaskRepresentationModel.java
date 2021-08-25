@@ -1,6 +1,8 @@
 package pro.taskana.task.common.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import io.leangen.graphql.annotations.types.GraphQLType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +12,10 @@ import pro.taskana.task.api.models.Task;
 
 /** EntityModel class for {@link Task}. */
 @JsonIgnoreProperties("attachmentSummaries")
+@GraphQLType(
+    description =
+        "Tasks are the main entity of TASKANA. Each task has its describing attributes like"
+            + " priority and due date.")
 public class TaskRepresentationModel extends TaskSummaryRepresentationModel {
 
   // All objects have to be serializable
@@ -22,6 +28,7 @@ public class TaskRepresentationModel extends TaskSummaryRepresentationModel {
   /** Attachments of the task. */
   private List<AttachmentRepresentationModel> attachments = new ArrayList<>();
 
+  @GraphQLQuery(description = "Additional information of the task.")
   public List<CustomAttribute> getCustomAttributes() {
     return customAttributes;
   }
@@ -30,6 +37,7 @@ public class TaskRepresentationModel extends TaskSummaryRepresentationModel {
     this.customAttributes = customAttributes;
   }
 
+  @GraphQLQuery(description = "Callback Information of the task.")
   public List<CustomAttribute> getCallbackInfo() {
     return callbackInfo;
   }
@@ -38,6 +46,7 @@ public class TaskRepresentationModel extends TaskSummaryRepresentationModel {
     this.callbackInfo = callbackInfo;
   }
 
+  @GraphQLQuery(description = "Attachments of the task.")
   public List<AttachmentRepresentationModel> getAttachments() {
     return attachments;
   }
@@ -68,6 +77,7 @@ public class TaskRepresentationModel extends TaskSummaryRepresentationModel {
       return customAttribute;
     }
 
+    @GraphQLQuery(description = "The key of the custom attribute.")
     public String getKey() {
       return key;
     }
@@ -76,6 +86,7 @@ public class TaskRepresentationModel extends TaskSummaryRepresentationModel {
       this.key = key;
     }
 
+    @GraphQLQuery(description = "The value of the custom attribute.")
     public String getValue() {
       return value;
     }

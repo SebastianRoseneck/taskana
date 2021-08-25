@@ -62,7 +62,7 @@ public class TaskQueryImpl implements TaskQuery {
   private String[] description;
   private String[] note;
   private String[] noteLike;
-  private Integer[] priority;
+  private int[] priority;
   private KeyDomain[] workbasketKeyDomainIn;
   private String[] workbasketIdIn;
   private TaskState[] stateIn;
@@ -233,7 +233,7 @@ public class TaskQueryImpl implements TaskQuery {
   }
 
   @Override
-  public TaskQuery priorityIn(Integer... priorities) {
+  public TaskQuery priorityIn(int... priorities) {
     this.priority = priorities;
     return this;
   }
@@ -1181,7 +1181,7 @@ public class TaskQueryImpl implements TaskQuery {
     return description;
   }
 
-  public Integer[] getPriority() {
+  public int[] getPriority() {
     return priority;
   }
 
