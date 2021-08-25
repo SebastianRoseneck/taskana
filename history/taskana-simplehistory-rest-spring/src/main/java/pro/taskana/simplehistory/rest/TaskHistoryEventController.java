@@ -147,7 +147,7 @@ public class TaskHistoryEventController {
   public static class TaskHistoryQuerySortParameter
       extends QuerySortParameter<TaskHistoryQuery, TaskHistoryQuerySortBy> {
 
-    @ConstructorProperties({"sort-by", "order"})
+    @ConstructorProperties({"sortBy", "order"})
     public TaskHistoryQuerySortParameter(
         List<TaskHistoryQuerySortBy> sortBy, List<SortDirection> order)
         throws InvalidArgumentException {

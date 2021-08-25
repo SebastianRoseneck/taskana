@@ -26,7 +26,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
-import pro.taskana.workbasket.rest.models.WorkbasketAccessItemPagedRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketAccessItemPagedRepresentationModel;
 
 /** Test WorkbasketAccessItemController. */
 @TestMethodOrder(MethodOrderer.MethodName.class)

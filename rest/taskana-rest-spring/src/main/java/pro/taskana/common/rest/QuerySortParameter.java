@@ -1,6 +1,7 @@
 package pro.taskana.common.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.leangen.graphql.annotations.GraphQLInputField;
 import java.util.List;
 
 import pro.taskana.common.api.BaseQuery;
@@ -13,7 +14,7 @@ public class QuerySortParameter<Q extends BaseQuery<?, ?>, S extends QuerySortBy
   // the javadoc comment for this field is above its getter. This is done to define the type
   // parameter S by overriding that getter and allowing spring-auto-rest-docs to properly detect
   // the type parameter S.
-  @JsonProperty("sort-by")
+  @JsonProperty("sortBy")
   private final List<S> sortBy;
 
   /**
@@ -26,7 +27,25 @@ public class QuerySortParameter<Q extends BaseQuery<?, ?>, S extends QuerySortBy
 
   // this is only necessary because spring-auto-rest-docs can't resolve Enum[] data types.
   // See https://github.com/ScaCap/spring-auto-restdocs/issues/423
-  public QuerySortParameter(List<S> sortBy, List<SortDirection> order)
+  public QuerySortParameter(
+      @GraphQLInputField(
+              description =
+                  "Sort the result by a given field. Multiple sort values can be declared. When the"
+                      + " primary sort value is the same, the second one will be used.\n"
+                      + "\n"
+                      + "Must be one of [NAME, KEY, OWNER, TYPE, DESCRIPTION, CUSTOM_1, CUSTOM_2,"
+                      + " CUSTOM_3, CUSTOM_4, DOMAIN, ORG_LEVEL_1, ORG_LEVEL_2, ORG_LEVEL_3,"
+                      + " ORG_LEVEL_4].")
+          List<S> sortBy,
+      @GraphQLInputField(
+              description =
+                  "The order direction for each sort value. This value requires the use of"
+                      + " 'sort-by'. The amount of sort-by and order declarations have to match."
+                      + " Alternatively the value can be omitted. If done so the default sort order"
+                      + " (ASCENDING) will be applied to every sort-by value.\n"
+                      + "\n"
+                      + "Must be one of [ASCENDING, DESCENDING].")
+          List<SortDirection> order)
       throws InvalidArgumentException {
     this.sortBy = sortBy;
     this.order = order;
@@ -71,7 +90,7 @@ public class QuerySortParameter<Q extends BaseQuery<?, ?>, S extends QuerySortBy
    *
    * @return the sort values
    */
-  @JsonProperty("sort-by")
+  @JsonProperty("sortBy")
   public List<S> getSortBy() {
     return sortBy;
   }

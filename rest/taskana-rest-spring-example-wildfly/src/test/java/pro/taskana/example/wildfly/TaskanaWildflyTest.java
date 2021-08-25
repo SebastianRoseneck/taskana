@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.rest.models.AccessIdRepresentationModel;
 import pro.taskana.common.rest.models.TaskanaUserInfoRepresentationModel;
-import pro.taskana.task.rest.models.TaskRepresentationModel;
+import pro.taskana.task.common.models.TaskRepresentationModel;
 
 /**
  * This test class is configured to run with postgres DB if you want to run it with h2 it is needed.

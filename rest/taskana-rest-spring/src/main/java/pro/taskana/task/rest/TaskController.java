@@ -41,11 +41,12 @@ import pro.taskana.task.api.exceptions.TaskAlreadyExistException;
 import pro.taskana.task.api.exceptions.TaskNotFoundException;
 import pro.taskana.task.api.models.Task;
 import pro.taskana.task.api.models.TaskSummary;
-import pro.taskana.task.rest.assembler.TaskRepresentationModelAssembler;
-import pro.taskana.task.rest.assembler.TaskSummaryRepresentationModelAssembler;
-import pro.taskana.task.rest.models.TaskRepresentationModel;
-import pro.taskana.task.rest.models.TaskSummaryCollectionRepresentationModel;
-import pro.taskana.task.rest.models.TaskSummaryPagedRepresentationModel;
+import pro.taskana.task.common.assembler.TaskRepresentationModelAssembler;
+import pro.taskana.task.common.assembler.TaskSummaryRepresentationModelAssembler;
+import pro.taskana.task.common.filter.TaskQueryFilterParameter;
+import pro.taskana.task.common.models.TaskRepresentationModel;
+import pro.taskana.task.common.models.TaskSummaryCollectionRepresentationModel;
+import pro.taskana.task.common.models.TaskSummaryPagedRepresentationModel;
 import pro.taskana.workbasket.api.exceptions.WorkbasketNotFoundException;
 
 /** Controller for all {@link Task} related endpoints. */
@@ -480,7 +481,7 @@ public class TaskController {
   public static class TaskQuerySortParameter
       extends QuerySortParameter<TaskQuery, TaskQuerySortBy> {
 
-    @ConstructorProperties({"sort-by", "order"})
+    @ConstructorProperties({"sortBy", "order"})
     public TaskQuerySortParameter(List<TaskQuerySortBy> sortBy, List<SortDirection> order)
         throws InvalidArgumentException {
       super(sortBy, order);

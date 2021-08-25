@@ -38,13 +38,13 @@ import pro.taskana.workbasket.api.models.Workbasket;
 import pro.taskana.workbasket.api.models.WorkbasketAccessItem;
 import pro.taskana.workbasket.api.models.WorkbasketSummary;
 import pro.taskana.workbasket.internal.models.WorkbasketImpl;
-import pro.taskana.workbasket.rest.assembler.WorkbasketAccessItemRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.assembler.WorkbasketDefinitionRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.assembler.WorkbasketRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.models.WorkbasketAccessItemRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketDefinitionCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketDefinitionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketRepresentationModel;
+import pro.taskana.workbasket.common.assembler.WorkbasketAccessItemRepresentationModelAssembler;
+import pro.taskana.workbasket.common.assembler.WorkbasketDefinitionRepresentationModelAssembler;
+import pro.taskana.workbasket.common.assembler.WorkbasketRepresentationModelAssembler;
+import pro.taskana.workbasket.common.models.WorkbasketAccessItemRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketDefinitionCollectionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketDefinitionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
 
 /** Controller for all {@link WorkbasketDefinitionRepresentationModel} related endpoints. */
 @RestController

@@ -15,6 +15,11 @@
   </parent>
 
   <dependencies>
+	<dependency>
+			<groupId>io.leangen.graphql</groupId>
+			<artifactId>graphql-spqr-spring-boot-starter</artifactId>
+			<version>0.0.6</version>
+		</dependency>
     <dependency>
       <groupId>pro.taskana</groupId>
       <artifactId>taskana-common-logging</artifactId>

@@ -17,6 +17,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>io.leangen.graphql</groupId>
+      <artifactId>spqr</artifactId>
+      <version>0.11.2</version>
+    </dependency>
+    <dependency>
       <groupId>pro.taskana</groupId>
       <artifactId>taskana-common-logging</artifactId>
       <version>${project.version}</version>

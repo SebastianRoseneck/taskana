@@ -17,9 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.web.client.HttpStatusCodeException;
 
-import pro.taskana.classification.rest.models.ClassificationRepresentationModel;
-import pro.taskana.classification.rest.models.ClassificationSummaryPagedRepresentationModel;
-import pro.taskana.classification.rest.models.ClassificationSummaryRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationSummaryPagedRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationSummaryRepresentationModel;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;

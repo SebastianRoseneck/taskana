@@ -35,11 +35,11 @@ import org.springframework.web.client.HttpStatusCodeException;
 
 import pro.taskana.classification.api.ClassificationService;
 import pro.taskana.classification.api.exceptions.ClassificationNotFoundException;
-import pro.taskana.classification.rest.assembler.ClassificationDefinitionCollectionRepresentationModel;
-import pro.taskana.classification.rest.assembler.ClassificationRepresentationModelAssembler;
-import pro.taskana.classification.rest.models.ClassificationCollectionRepresentationModel;
-import pro.taskana.classification.rest.models.ClassificationDefinitionRepresentationModel;
-import pro.taskana.classification.rest.models.ClassificationRepresentationModel;
+import pro.taskana.classification.common.assembler.ClassificationDefinitionCollectionRepresentationModel;
+import pro.taskana.classification.common.assembler.ClassificationRepresentationModelAssembler;
+import pro.taskana.classification.common.models.ClassificationCollectionRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationDefinitionRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationRepresentationModel;
 import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;

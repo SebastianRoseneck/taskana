@@ -28,10 +28,11 @@ import pro.taskana.classification.api.exceptions.ClassificationNotFoundException
 import pro.taskana.classification.api.exceptions.MalformedServiceLevelException;
 import pro.taskana.classification.api.models.Classification;
 import pro.taskana.classification.api.models.ClassificationSummary;
-import pro.taskana.classification.rest.assembler.ClassificationRepresentationModelAssembler;
-import pro.taskana.classification.rest.assembler.ClassificationSummaryRepresentationModelAssembler;
-import pro.taskana.classification.rest.models.ClassificationRepresentationModel;
-import pro.taskana.classification.rest.models.ClassificationSummaryPagedRepresentationModel;
+import pro.taskana.classification.common.assembler.ClassificationRepresentationModelAssembler;
+import pro.taskana.classification.common.assembler.ClassificationSummaryRepresentationModelAssembler;
+import pro.taskana.classification.common.filter.ClassificationQueryFilterParameter;
+import pro.taskana.classification.common.models.ClassificationRepresentationModel;
+import pro.taskana.classification.common.models.ClassificationSummaryPagedRepresentationModel;
 import pro.taskana.common.api.BaseQuery.SortDirection;
 import pro.taskana.common.api.exceptions.ConcurrencyException;
 import pro.taskana.common.api.exceptions.DomainNotFoundException;
@@ -230,7 +231,7 @@ public class ClassificationController {
   public static class ClassificationQuerySortParameter
       extends QuerySortParameter<ClassificationQuery, ClassificationQuerySortBy> {
 
-    @ConstructorProperties({"sort-by", "order"})
+    @ConstructorProperties({"sortBy", "order"})
     public ClassificationQuerySortParameter(
         List<ClassificationQuerySortBy> sortBy, List<SortDirection> order)
         throws InvalidArgumentException {

@@ -38,9 +38,9 @@ import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
 import pro.taskana.sampledata.SampleDataGenerator;
-import pro.taskana.workbasket.rest.models.WorkbasketDefinitionCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketDefinitionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketDefinitionCollectionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketDefinitionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
 
 /** Integration tests for WorkbasketDefinitionController. */
 @TaskanaSpringBootTest

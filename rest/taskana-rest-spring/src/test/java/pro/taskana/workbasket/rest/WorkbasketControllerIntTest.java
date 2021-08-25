@@ -23,11 +23,11 @@ import pro.taskana.common.rest.RestEndpoints;
 import pro.taskana.common.test.rest.RestHelper;
 import pro.taskana.common.test.rest.TaskanaSpringBootTest;
 import pro.taskana.workbasket.api.WorkbasketType;
-import pro.taskana.workbasket.rest.models.DistributionTargetsCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketAccessItemCollectionRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketSummaryPagedRepresentationModel;
-import pro.taskana.workbasket.rest.models.WorkbasketSummaryRepresentationModel;
+import pro.taskana.workbasket.common.models.DistributionTargetsCollectionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketAccessItemCollectionRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketSummaryPagedRepresentationModel;
+import pro.taskana.workbasket.common.models.WorkbasketSummaryRepresentationModel;
 
 /** Test WorkbasketController. */
 @TaskanaSpringBootTest
@@ -231,8 +231,7 @@ class WorkbasketControllerIntTest {
             RestEndpoints.URL_WORKBASKET_ID, "WBI:100000000000000000000000000000000004");
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("businessadmin"));
 
-    ThrowingCallable call =
-        () -> TEMPLATE.exchange(url, HttpMethod.DELETE, auth, Void.class);
+    ThrowingCallable call = () -> TEMPLATE.exchange(url, HttpMethod.DELETE, auth, Void.class);
 
     assertThatThrownBy(call)
         .isInstanceOf(HttpStatusCodeException.class)

@@ -24,8 +24,9 @@ import pro.taskana.common.rest.util.QueryParamsValidator;
 import pro.taskana.workbasket.api.WorkbasketAccessItemQuery;
 import pro.taskana.workbasket.api.WorkbasketService;
 import pro.taskana.workbasket.api.models.WorkbasketAccessItem;
-import pro.taskana.workbasket.rest.assembler.WorkbasketAccessItemRepresentationModelAssembler;
-import pro.taskana.workbasket.rest.models.WorkbasketAccessItemPagedRepresentationModel;
+import pro.taskana.workbasket.common.assembler.WorkbasketAccessItemRepresentationModelAssembler;
+import pro.taskana.workbasket.common.models.WorkbasketAccessItemPagedRepresentationModel;
+import pro.taskana.workbasket.common.filter.WorkbasketAccessItemQueryFilterParameter;
 
 /** Controller for Workbasket access. */
 @RestController
@@ -134,7 +135,7 @@ public class WorkbasketAccessItemController {
   public static class WorkbasketAccessItemQuerySortParameter
       extends QuerySortParameter<WorkbasketAccessItemQuery, WorkbasketAccessItemSortBy> {
 
-    @ConstructorProperties({"sort-by", "order"})
+    @ConstructorProperties({"sortBy", "order"})
     public WorkbasketAccessItemQuerySortParameter(
         List<WorkbasketAccessItemSortBy> sortBy, List<SortDirection> order)
         throws InvalidArgumentException {

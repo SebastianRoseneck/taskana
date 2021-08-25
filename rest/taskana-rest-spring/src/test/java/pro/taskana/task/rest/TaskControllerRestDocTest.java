@@ -18,8 +18,8 @@ import pro.taskana.common.test.security.WithAccessId;
 import pro.taskana.task.api.TaskService;
 import pro.taskana.task.api.models.ObjectReference;
 import pro.taskana.task.api.models.Task;
-import pro.taskana.task.rest.assembler.TaskRepresentationModelAssembler;
-import pro.taskana.task.rest.models.TaskRepresentationModel;
+import pro.taskana.task.common.assembler.TaskRepresentationModelAssembler;
+import pro.taskana.task.common.models.TaskRepresentationModel;
 
 @ExtendWith(JaasExtension.class)
 class TaskControllerRestDocTest extends BaseRestDocTest {
