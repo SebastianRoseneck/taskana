@@ -59,7 +59,7 @@ class WorkbasketAccessItemControllerIntTest {
   @Test
   void testGetWorkbasketAccessItemsKeepingFilters() {
     String parameters =
-        "?sort-by=WORKBASKET_KEY&order=ASCENDING&page-size=9&access-id=user-1-1&page=1";
+        "?sortBy=WORKBASKET_KEY&order=ASCENDING&pageSize=9&accessId=user-1-1&page=1";
     String url = restHelper.toUrl(RestEndpoints.URL_WORKBASKET_ACCESS_ITEMS) + parameters;
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
@@ -78,7 +78,7 @@ class WorkbasketAccessItemControllerIntTest {
   @Test
   void testGetSecondPageSortedByWorkbasketKey() {
     String parameters =
-        "?sort-by=WORKBASKET_KEY&order=ASCENDING&page=2&page-size=9&access-id=user-1-1";
+        "?sortBy=WORKBASKET_KEY&order=ASCENDING&page=2&pageSize=9&accessId=user-1-1";
     String url = restHelper.toUrl(RestEndpoints.URL_WORKBASKET_ACCESS_ITEMS) + parameters;
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
@@ -120,10 +120,10 @@ class WorkbasketAccessItemControllerIntTest {
   void should_ThrowException_When_ProvidingInvalidFilterParams() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_WORKBASKET_ACCESS_ITEMS)
-            + "?access-id=teamlead-2"
+            + "?accessId=teamlead-2"
             + "&illegalParam=illegal"
             + "&anotherIllegalParam=stillIllegal"
-            + "&sort-by=WORKBASKET_KEY&order=DESCENDING&page-size=5&page=2";
+            + "&sortBy=WORKBASKET_KEY&order=DESCENDING&pageSize=5&page=2";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =

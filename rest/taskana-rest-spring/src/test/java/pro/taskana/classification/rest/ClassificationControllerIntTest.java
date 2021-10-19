@@ -93,7 +93,7 @@ class ClassificationControllerIntTest {
   @Test
   void testGetAllClassificationsFilterByCustomAttribute() {
     String url =
-        restHelper.toUrl(RestEndpoints.URL_CLASSIFICATIONS) + "?domain=DOMAIN_A&custom-1-like=RVNR";
+        restHelper.toUrl(RestEndpoints.URL_CLASSIFICATIONS) + "?domain=DOMAIN_A&custom1Like=RVNR";
     HttpEntity<?> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<ClassificationSummaryPagedRepresentationModel> response =
@@ -113,7 +113,7 @@ class ClassificationControllerIntTest {
   void testGetAllClassificationsKeepingFilters() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_CLASSIFICATIONS)
-            + "?domain=DOMAIN_A&sort-by=KEY&order=ASCENDING";
+            + "?domain=DOMAIN_A&sortBy=KEY&order=ASCENDING";
     HttpEntity<?> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<ClassificationSummaryPagedRepresentationModel> response =
@@ -127,7 +127,7 @@ class ClassificationControllerIntTest {
     assertThat(response.getBody()).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.SELF)).isNotNull();
     assertThat(response.getBody().getRequiredLink(IanaLinkRelations.SELF).getHref())
-        .endsWith("/api/v1/classifications?domain=DOMAIN_A&sort-by=KEY&order=ASCENDING");
+        .endsWith("/api/v1/classifications?domain=DOMAIN_A&sortBy=KEY&order=ASCENDING");
     assertThat(response.getBody().getContent()).hasSize(37);
     assertThat(response.getBody().getContent().iterator().next().getKey()).isEqualTo("A12");
   }
@@ -136,7 +136,7 @@ class ClassificationControllerIntTest {
   void testGetSecondPageSortedByKey() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_CLASSIFICATIONS)
-            + "?domain=DOMAIN_A&sort-by=KEY&order=ASCENDING&page-size=5&page=2";
+            + "?domain=DOMAIN_A&sortBy=KEY&order=ASCENDING&pageSize=5&page=2";
     HttpEntity<?> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<ClassificationSummaryPagedRepresentationModel> response =
@@ -154,7 +154,7 @@ class ClassificationControllerIntTest {
     assertThat(response.getBody().getRequiredLink(IanaLinkRelations.SELF).getHref())
         .endsWith(
             "/api/v1/classifications?"
-                + "domain=DOMAIN_A&sort-by=KEY&order=ASCENDING&page-size=5&page=2");
+                + "domain=DOMAIN_A&sortBy=KEY&order=ASCENDING&pageSize=5&page=2");
     assertThat(response.getBody().getLink(IanaLinkRelations.FIRST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.LAST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.NEXT)).isNotNull();
@@ -461,7 +461,7 @@ class ClassificationControllerIntTest {
             + "?domain=DOMAIN_A"
             + "&illegalParam=illegal"
             + "&anotherIllegalParam=stillIllegal"
-            + "&sort-by=NAME&order=DESCENDING&page-size=5&page=2";
+            + "&sortBy=NAME&order=DESCENDING&pageSize=5&page=2";
     HttpEntity<?> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =

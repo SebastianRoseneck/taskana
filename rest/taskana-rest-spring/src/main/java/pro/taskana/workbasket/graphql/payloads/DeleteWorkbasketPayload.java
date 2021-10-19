@@ -7,13 +7,13 @@ package pro.taskana.workbasket.graphql.payloads;
  */
 public class DeleteWorkbasketPayload {
 
-  private final String custom;
+  private final String message;
 
-  public DeleteWorkbasketPayload(String custom) {
-    this.custom = custom;
+  public DeleteWorkbasketPayload(String message) {
+    this.message = message;
   }
 
-  public String getCustom() {
-    return custom;
+  public String getMessage() {
+    return message;
   }
 }

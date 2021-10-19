@@ -95,7 +95,7 @@ public class TaskCommentController {
   @Transactional(readOnly = true, rollbackFor = Exception.class)
   public ResponseEntity<TaskCommentCollectionRepresentationModel> getTaskComments(
       @PathVariable String taskId,
-      @RequestParam(name = "sort-by", required = false) List<TaskCommentsSortBy> sortBy,
+      @RequestParam(name = "sortBy", required = false) List<TaskCommentsSortBy> sortBy,
       @RequestParam(required = false) List<SortDirection> order)
       throws NotAuthorizedException, TaskNotFoundException, InvalidArgumentException {
     Optional<Comparator<TaskComment>> comparator = getTaskCommentComparator(sortBy, order);

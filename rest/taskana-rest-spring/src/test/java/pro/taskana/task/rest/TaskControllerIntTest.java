@@ -97,7 +97,7 @@ class TaskControllerIntTest {
   void testGetAllTasksByWorkbasketId() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001";
+            + "?workbasketId=WBI:100000000000000000000000000000000001";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -117,11 +117,11 @@ class TaskControllerIntTest {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
             + String.format(
-                "?workbasket-id=WBI:100000000000000000000000000000000001"
+                "?workbasketId=WBI:100000000000000000000000000000000001"
                     + "&planned=%s&planned="
                     + "&planned=%s&planned=%s"
                     + "&planned=&planned=%s"
-                    + "&sort-by=PLANNED",
+                    + "&sortBy=PLANNED",
                 firstInstant, secondInstant, thirdInstant, fourthInstant);
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
@@ -139,12 +139,12 @@ class TaskControllerIntTest {
     Instant plannedToInstant = Instant.now().minus(3, ChronoUnit.DAYS);
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
-            + "&planned-from="
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
+            + "&plannedFrom="
             + plannedFromInstant
-            + "&planned-until="
+            + "&plannedUntil="
             + plannedToInstant
-            + "&sort-by=PLANNED";
+            + "&sortBy=PLANNED";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -160,10 +160,10 @@ class TaskControllerIntTest {
     Instant plannedFromInstant = Instant.now().minus(6, ChronoUnit.DAYS);
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
-            + "&planned-from="
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
+            + "&plannedFrom="
             + plannedFromInstant
-            + "&sort-by=PLANNED";
+            + "&sortBy=PLANNED";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -178,12 +178,12 @@ class TaskControllerIntTest {
   void testGetAllTasksByWorkbasketIdWithInvalidPlannedParamsCombination() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
             + "&planned=2020-01-22T09:44:47.453Z,,"
             + "2020-01-19T07:44:47.453Z,2020-01-19T19:44:47.453Z,"
             + ",2020-01-18T09:44:47.453Z"
-            + "&planned-from=2020-01-19T07:44:47.453Z"
-            + "&sort-by=planned";
+            + "&plannedFrom=2020-01-19T07:44:47.453Z"
+            + "&sortBy=planned";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =
@@ -205,11 +205,11 @@ class TaskControllerIntTest {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
             + String.format(
-                "?workbasket-id=WBI:100000000000000000000000000000000001"
+                "?workbasketId=WBI:100000000000000000000000000000000001"
                     + "&due=%s&due="
                     + "&due=%s&due=%s"
                     + "&due=&due=%s"
-                    + "&sort-by=DUE",
+                    + "&sortBy=DUE",
                 firstInstant, secondInstant, thirdInstant, fourthInstant);
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
@@ -225,10 +225,10 @@ class TaskControllerIntTest {
   void should_ReturnAllTasksByWildcardSearch_For_ProvidedSearchValue() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?wildcard-search-value=99"
-            + "&wildcard-search-fields=NAME"
-            + "&wildcard-search-fields=CUSTOM_3"
-            + "&wildcard-search-fields=CUSTOM_4";
+            + "?wildcardSearchValue=99"
+            + "&wildcardSearchFields=NAME"
+            + "&wildcardSearchFields=CUSTOM_3"
+            + "&wildcardSearchFields=CUSTOM_4";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("admin"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -274,9 +274,9 @@ class TaskControllerIntTest {
   void should_DeleteAllTasks_For_ProvidedParams() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?task-id=TKI:000000000000000000000000000000000036"
-            + "&task-id=TKI:000000000000000000000000000000000037"
-            + "&task-id=TKI:000000000000000000000000000000000038"
+            + "?taskId=TKI:000000000000000000000000000000000036"
+            + "&taskId=TKI:000000000000000000000000000000000037"
+            + "&taskId=TKI:000000000000000000000000000000000038"
             + "&custom14=abc";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("admin"));
 
@@ -290,7 +290,7 @@ class TaskControllerIntTest {
 
   @Test
   void should_ThrowException_When_ProvidingInvalidWildcardSearchParameters() {
-    String url = restHelper.toUrl(RestEndpoints.URL_TASKS) + "?wildcard-search-value=%rt%";
+    String url = restHelper.toUrl(RestEndpoints.URL_TASKS) + "?wildcardSearchValue=%rt%";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =
@@ -303,8 +303,7 @@ class TaskControllerIntTest {
         .isEqualTo(HttpStatus.BAD_REQUEST);
 
     String url2 =
-        restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?wildcard-search-fields=NAME,CUSTOM_3,CUSTOM_4";
+        restHelper.toUrl(RestEndpoints.URL_TASKS) + "?wildcardSearchFields=NAME,CUSTOM_3,CUSTOM_4";
     ThrowingCallable httpCall2 =
         () -> TEMPLATE.exchange(url2, HttpMethod.GET, auth, TASK_SUMMARY_PAGE_MODEL_TYPE);
 
@@ -321,12 +320,12 @@ class TaskControllerIntTest {
     Instant dueToInstant = Instant.now().minus(3, ChronoUnit.DAYS);
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
-            + "&due-from="
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
+            + "&dueFrom="
             + dueFromInstant
-            + "&due-until="
+            + "&dueUntil="
             + dueToInstant
-            + "&sort-by=DUE";
+            + "&sortBy=DUE";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -342,10 +341,10 @@ class TaskControllerIntTest {
     Instant dueToInstant = Instant.now().minus(1, ChronoUnit.DAYS);
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
-            + "&due-until="
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
+            + "&dueUntil="
             + dueToInstant
-            + "&sort-by=DUE";
+            + "&sortBy=DUE";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -360,12 +359,12 @@ class TaskControllerIntTest {
   void testGetAllTasksByWorkbasketIdWithInvalidDueParamsCombination() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
             + "&due=2020-01-22T09:44:47.453Z,,"
             + "2020-01-19T07:44:47.453Z,2020-01-19T19:44:47.453Z,"
             + ",2020-01-18T09:44:47.453Z"
-            + "&due-from=2020-01-19T07:44:47.453Z"
-            + "&sort-by=planned";
+            + "&dueFrom=2020-01-19T07:44:47.453Z"
+            + "&sortBy=planned";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =
@@ -383,7 +382,7 @@ class TaskControllerIntTest {
   @Test
   void testGetAllTasksByWorkbasketKeyAndDomain() {
     String url =
-        restHelper.toUrl(RestEndpoints.URL_TASKS) + "?workbasket-key=USER-1-2&domain=DOMAIN_A";
+        restHelper.toUrl(RestEndpoints.URL_TASKS) + "?workbasketKey=USER-1-2&domain=DOMAIN_A";
     HttpEntity<String> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("user-1-2"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -398,8 +397,8 @@ class TaskControllerIntTest {
   void testGetAllTasksByExternalId() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?external-id=ETI:000000000000000000000000000000000003"
-            + "&external-id=ETI:000000000000000000000000000000000004";
+            + "?externalId=ETI:000000000000000000000000000000000003"
+            + "&externalId=ETI:000000000000000000000000000000000004";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -412,7 +411,7 @@ class TaskControllerIntTest {
 
   @Test
   void testExceptionIfKeyIsSetButDomainIsMissing() {
-    String url = restHelper.toUrl(RestEndpoints.URL_TASKS) + "?workbasket-key=USER-1-2";
+    String url = restHelper.toUrl(RestEndpoints.URL_TASKS) + "?workbasketKey=USER-1-2";
     HttpEntity<String> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("user-1-2"));
 
     ThrowingCallable httpCall =
@@ -442,7 +441,7 @@ class TaskControllerIntTest {
   void testGetAllTasksKeepingFilters() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?por.type=VNR&por.value=22334455&sort-by=POR_VALUE&order=DESCENDING";
+            + "?porType=VNR&porValue=22334455&sortBy=POR_VALUE&order=DESCENDING";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -452,16 +451,15 @@ class TaskControllerIntTest {
     assertThat((response.getBody()).getLink(IanaLinkRelations.SELF)).isNotNull();
     assertThat(response.getBody().getRequiredLink(IanaLinkRelations.SELF).getHref())
         .endsWith(
-            "/api/v1/tasks?por.type=VNR&por.value=22334455"
-                + "&sort-by=POR_VALUE&order=DESCENDING");
+            "/api/v1/tasks?porType=VNR&porValue=22334455" + "&sortBy=POR_VALUE&order=DESCENDING");
   }
 
   @Test
   void testGetLastPageSortedByPorValue() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?state=READY&state=CLAIMED&sort-by=POR_VALUE"
-            + "&order=DESCENDING&page-size=5&page=16";
+            + "?state=READY&state=CLAIMED&sortBy=POR_VALUE"
+            + "&order=DESCENDING&pageSize=5&page=16";
     HttpEntity<String> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("admin"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -477,7 +475,7 @@ class TaskControllerIntTest {
     assertThat(response.getBody().getRequiredLink(IanaLinkRelations.SELF).getHref())
         .endsWith(
             "/api/v1/tasks?state=READY&state=CLAIMED"
-                + "&sort-by=POR_VALUE&order=DESCENDING&page-size=5&page=16");
+                + "&sortBy=POR_VALUE&order=DESCENDING&pageSize=5&page=16");
     assertThat(response.getBody().getLink(IanaLinkRelations.FIRST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.LAST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.PREV)).isNotNull();
@@ -489,7 +487,7 @@ class TaskControllerIntTest {
     // required because
     // ClassificationControllerIntTest.testGetQueryByPorSecondPageSortedByType changes
     // tasks and this test depends on the tasks as they are in sampledata
-    String url = restHelper.toUrl(RestEndpoints.URL_TASKS) + "?sort-by=DUE&order=DESCENDING";
+    String url = restHelper.toUrl(RestEndpoints.URL_TASKS) + "?sortBy=DUE&order=DESCENDING";
     HttpEntity<String> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -500,7 +498,7 @@ class TaskControllerIntTest {
 
     String url2 =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?sort-by=DUE&order=DESCENDING&page-size=5&page=5";
+            + "?sortBy=DUE&order=DESCENDING&pageSize=5&page=5";
     response = TEMPLATE.exchange(url2, HttpMethod.GET, auth, TASK_SUMMARY_PAGE_MODEL_TYPE);
 
     assertThat(response.getBody()).isNotNull();
@@ -511,7 +509,7 @@ class TaskControllerIntTest {
         .isEqualTo("TKI:000000000000000000000000000000000073");
     assertThat(response.getBody().getLink(IanaLinkRelations.SELF)).isNotNull();
     assertThat(response.getBody().getRequiredLink(IanaLinkRelations.SELF).getHref())
-        .endsWith("/api/v1/tasks?sort-by=DUE&order=DESCENDING&page-size=5&page=5");
+        .endsWith("/api/v1/tasks?sortBy=DUE&order=DESCENDING&pageSize=5&page=5");
     assertThat(response.getBody().getLink(IanaLinkRelations.FIRST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.LAST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.PREV)).isNotNull();
@@ -524,9 +522,9 @@ class TaskControllerIntTest {
     // tasks and this test depends on the tasks as they are in sampledata
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?por.company=00&por.system=PASystem&por.instance=00&"
-            + "por.type=VNR&por.value=22334455&sort-by=POR_TYPE&"
-            + "order=ASCENDING&page-size=5&page=2";
+            + "?porCompany=00&porSystem=PASystem&porInstance=00&"
+            + "porType=VNR&porValue=22334455&sortBy=POR_TYPE&"
+            + "order=ASCENDING&pageSize=5&page=2";
     HttpEntity<String> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<TaskSummaryPagedRepresentationModel> response =
@@ -539,9 +537,9 @@ class TaskControllerIntTest {
     assertThat(response.getBody().getLink(IanaLinkRelations.SELF)).isNotNull();
     assertThat(response.getBody().getRequiredLink(IanaLinkRelations.SELF).getHref())
         .endsWith(
-            "/api/v1/tasks?por.company=00&por.system=PASystem&por.instance=00&"
-                + "por.type=VNR&por.value=22334455&sort-by=POR_TYPE&order=ASCENDING&"
-                + "page-size=5&page=2");
+            "/api/v1/tasks?porCompany=00&porSystem=PASystem&porInstance=00&"
+                + "porType=VNR&porValue=22334455&sortBy=POR_TYPE&order=ASCENDING&"
+                + "pageSize=5&page=2");
     assertThat(response.getBody().getLink(IanaLinkRelations.FIRST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.LAST)).isNotNull();
     assertThat(response.getBody().getLink(IanaLinkRelations.PREV)).isNotNull();
@@ -904,10 +902,10 @@ class TaskControllerIntTest {
   void should_ThrowException_When_ProvidingInvalidFilterParams() {
     String url =
         restHelper.toUrl(RestEndpoints.URL_TASKS)
-            + "?workbasket-id=WBI:100000000000000000000000000000000001"
+            + "?workbasketId=WBI:100000000000000000000000000000000001"
             + "&illegalParam=illegal"
             + "&anotherIllegalParam=stillIllegal"
-            + "&sort-by=NAME&order=DESCENDING&page-size=5&page=2";
+            + "&sortBy=NAME&order=DESCENDING&pageSize=5&page=2";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =

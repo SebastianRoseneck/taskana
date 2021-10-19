@@ -79,7 +79,7 @@ class WorkbasketControllerIntTest {
 
   @Test
   void testGetAllWorkbasketsBusinessAdminHasOpenPermission() {
-    String url = restHelper.toUrl(RestEndpoints.URL_WORKBASKET) + "?required-permission=OPEN";
+    String url = restHelper.toUrl(RestEndpoints.URL_WORKBASKET) + "?requiredPermission=OPEN";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ResponseEntity<WorkbasketSummaryPagedRepresentationModel> response =
@@ -96,7 +96,7 @@ class WorkbasketControllerIntTest {
 
   @Test
   void testGetAllWorkbasketsKeepingFilters() {
-    String parameters = "?type=PERSONAL&sort-by=KEY&order=DESCENDING";
+    String parameters = "?type=PERSONAL&sortBy=KEY&order=DESCENDING";
     String url = restHelper.toUrl(RestEndpoints.URL_WORKBASKET) + parameters;
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
@@ -184,7 +184,7 @@ class WorkbasketControllerIntTest {
 
   @Test
   void testGetSecondPageSortedByKey() {
-    String parameters = "?sort-by=KEY&order=DESCENDING&page-size=5&page=2";
+    String parameters = "?sortBy=KEY&order=DESCENDING&pageSize=5&page=2";
     String url = restHelper.toUrl(RestEndpoints.URL_WORKBASKET) + parameters;
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
@@ -321,7 +321,7 @@ class WorkbasketControllerIntTest {
             + "?type=PERSONAL"
             + "&illegalParam=illegal"
             + "&anotherIllegalParam=stillIllegal"
-            + "&sort-by=KEY&order=DESCENDING&page-size=5&page=2";
+            + "&sortBy=KEY&order=DESCENDING&pageSize=5&page=2";
     HttpEntity<Object> auth = new HttpEntity<>(RestHelper.generateHeadersForUser("teamlead-1"));
 
     ThrowingCallable httpCall =
