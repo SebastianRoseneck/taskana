@@ -35,13 +35,13 @@ export class WorkbasketListComponent implements OnInit, OnDestroy {
   type = 'workbaskets';
   workbasketDefaultSortBy: WorkbasketQuerySortParameter = WorkbasketQuerySortParameter.NAME;
   sort: Sorting<WorkbasketQuerySortParameter> = {
-    'sort-by': this.workbasketDefaultSortBy,
+    'sortBy': this.workbasketDefaultSortBy,
     order: Direction.ASC
   };
   filterBy: WorkbasketQueryFilterParameter = {};
   pageParameter: QueryPagingParameter = {
     page: 1,
-    'page-size': 9
+    'pageSize': 9
   };
   requestInProgress: boolean;
   requestInProgressLocal = false;
@@ -178,7 +178,7 @@ export class WorkbasketListComponent implements OnInit, OnDestroy {
   }
 
   refreshWorkbasketList() {
-    this.pageParameter['page-size'] = this.orientationService.calculateNumberItemsList(
+    this.pageParameter['pageSize'] = this.orientationService.calculateNumberItemsList(
       window.innerHeight,
       92,
       200 + this.toolbarElement.nativeElement.offsetHeight,

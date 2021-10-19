@@ -4,7 +4,7 @@ export enum Direction {
 }
 
 export interface Sorting<T> {
-  'sort-by': T;
+  'sortBy': T;
   order: Direction;
 }
 

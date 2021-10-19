@@ -51,10 +51,10 @@ export class WorkbasketFilterComponent implements OnInit, OnDestroy {
 
   setFilter(filter: WorkbasketQueryFilterParameter) {
     this.filter = {
-      'description-like': [...filter['description-like']],
-      'key-like': [...filter['key-like']],
-      'name-like': [...filter['name-like']],
-      'owner-like': [...filter['owner-like']],
+      'descriptionLike': [...filter['descriptionLike']],
+      'keyLike': [...filter['keyLike']],
+      'nameLike': [...filter['nameLike']],
+      'ownerLike': [...filter['ownerLike']],
       type: [...filter['type']]
     };
   }

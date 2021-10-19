@@ -106,7 +106,7 @@ export class ClassificationState implements NgxsAfterBootstrap {
           type: [selectedClassificationType]
         };
         const sort: Sorting<ClassificationQuerySortParameter> = {
-          'sort-by': ClassificationQuerySortParameter.KEY,
+          'sortBy': ClassificationQuerySortParameter.KEY,
           order: Direction.ASC
         };
         return this.classificationsService.getClassifications(filter, sort).pipe(

@@ -49,12 +49,12 @@ export class TaskHistoryQueryComponent implements OnInit {
 
   pageParameter: QueryPagingParameter = {
     page: 1,
-    'page-size': 9
+    'pageSize': 9
   };
 
   // IMPORTANT: Please make sure that material table default matches with this entity.
   sortParameter: Sorting<TaskHistoryQuerySortParameter> = {
-    'sort-by': TaskHistoryQuerySortParameter.CREATED,
+    'sortBy': TaskHistoryQuerySortParameter.CREATED,
     order: Direction.ASC
   };
 
@@ -99,7 +99,7 @@ export class TaskHistoryQueryComponent implements OnInit {
       );
       if (pair) {
         this.sortParameter = {
-          'sort-by': pair.right,
+          'sortBy': pair.right,
           order: sort.direction === 'asc' ? Direction.ASC : Direction.DESC
         };
       }
@@ -121,6 +121,6 @@ export class TaskHistoryQueryComponent implements OnInit {
     const unusedHeight = 300;
     const totalHeight = window.innerHeight;
     const cards = Math.round((totalHeight - unusedHeight) / rowHeight);
-    this.pageParameter['page-size'] = cards > 0 ? cards : 1;
+    this.pageParameter['pageSize'] = cards > 0 ? cards : 1;
   }
 }

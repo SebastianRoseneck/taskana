@@ -3,13 +3,13 @@ import { WorkbasketPermission } from './workbasket-permission';
 
 export interface WorkbasketQueryFilterParameter {
   name?: string[];
-  'name-like'?: string[];
+  'nameLike'?: string[];
   key?: string[];
-  'key-like'?: string[];
+  'keyLike'?: string[];
   owner?: string[];
-  'owner-like'?: string[];
-  'description-like'?: string[];
+  'ownerLike'?: string[];
+  'descriptionLike'?: string[];
   domain?: string[];
   type?: WorkbasketType[];
-  'required-permission'?: WorkbasketPermission[];
+  'requiredPermission'?: WorkbasketPermission[];
 }

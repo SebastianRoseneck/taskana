@@ -39,8 +39,8 @@ export class TaskFilterComponent implements OnInit, OnDestroy {
   clear() {
     this.filter = {
       priority: [],
-      'name-like': [],
-      'owner-like': []
+      'nameLike': [],
+      'ownerLike': []
     };
   }
 

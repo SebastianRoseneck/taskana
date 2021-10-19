@@ -144,7 +144,7 @@ describe('WorkbasketListComponent', () => {
 
   it('should set sort value when performSorting is called', () => {
     const sort: Sorting<WorkbasketQuerySortParameter> = {
-      'sort-by': WorkbasketQuerySortParameter.TYPE,
+      'sortBy': WorkbasketQuerySortParameter.TYPE,
       order: Direction.ASC
     };
     component.performSorting(sort);

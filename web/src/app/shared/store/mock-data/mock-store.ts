@@ -192,16 +192,16 @@ export const workbasketReadStateMock = {
   paginatedWorkbasketsSummary: {
     _links: {
       self: {
-        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sort-by=name&order=asc&domain=DOMAIN_A&page=3&page-size=8'
+        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sortBy=name&order=asc&domain=DOMAIN_A&page=3&pageSize=8'
       },
       first: {
-        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sort-by=name&order=asc&domain=DOMAIN_A&page-size=8&page=1'
+        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sortBy=name&order=asc&domain=DOMAIN_A&pageSize=8&page=1'
       },
       last: {
-        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sort-by=name&order=asc&domain=DOMAIN_A&page-size=8&page=3'
+        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sortBy=name&order=asc&domain=DOMAIN_A&pageSize=8&page=3'
       },
       prev: {
-        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sort-by=name&order=asc&domain=DOMAIN_A&page-size=8&page=2'
+        href: 'http://localhost:8080/taskana/api/v1/workbaskets/?sortBy=name&order=asc&domain=DOMAIN_A&pageSize=8&page=2'
       }
     },
     workbaskets: [

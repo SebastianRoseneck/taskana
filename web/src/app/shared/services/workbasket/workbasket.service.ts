@@ -64,7 +64,7 @@ export class WorkbasketService {
   // GET
   getAllWorkBaskets(): Observable<WorkbasketRepresentation> {
     return this.httpClient.get<WorkbasketRepresentation>(
-      `${environment.taskanaRestUrl}/v1/workbaskets?required-permission=OPEN`
+      `${environment.taskanaRestUrl}/v1/workbaskets?requiredPermission=OPEN`
     );
   }
 

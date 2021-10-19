@@ -30,12 +30,12 @@ export class TaskMasterComponent implements OnInit, OnDestroy {
   selectedId = '';
   taskDefaultSortBy: TaskQuerySortParameter = TaskQuerySortParameter.PRIORITY;
   sort: Sorting<TaskQuerySortParameter> = {
-    'sort-by': this.taskDefaultSortBy,
+    'sortBy': this.taskDefaultSortBy,
     order: Direction.ASC
   };
   paging: QueryPagingParameter = {
     page: 1,
-    'page-size': 9
+    'pageSize': 9
   };
   filterBy: TaskQueryFilterParameter = {};
 
@@ -57,7 +57,7 @@ export class TaskMasterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.cards$.pipe(takeUntil(this.destroy$)).subscribe((cards) => {
-      this.paging['page-size'] = cards;
+      this.paging['pageSize'] = cards;
       this.getTasks();
     });
 
@@ -127,7 +127,7 @@ export class TaskMasterComponent implements OnInit, OnDestroy {
       delete this.currentBasket;
     }
 
-    this.filterBy['workbasket-id'] = [this.currentBasket?.workbasketId];
+    this.filterBy['workbasketId'] = [this.currentBasket?.workbasketId];
 
     if (this.selectedSearchType === Search.byWorkbasket && !this.currentBasket) {
       this.requestInProgress = false;

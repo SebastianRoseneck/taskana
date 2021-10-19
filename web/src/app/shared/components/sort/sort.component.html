@@ -38,7 +38,7 @@
     <mat-menu #sortValue="matMenu">
       <button mat-menu-item *ngFor="let sortingField of sortingFields | mapValues"
               (click)="changeSortBy(sortingField.key)">
-        <span class="{{sortingField.key === sort['sort-by']  ? 'sort__selected-value' : ''}}">
+        <span class="{{sortingField.key === sort['sortBy']  ? 'sort__selected-value' : ''}}">
           {{sortingField.value}}
         </span>
         <ng-template #coloredValue>

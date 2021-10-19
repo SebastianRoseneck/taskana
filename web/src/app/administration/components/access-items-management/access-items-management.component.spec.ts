@@ -165,7 +165,7 @@ describe('AccessItemsManagementComponent', () => {
       { accessId: '2', name: 'users' }
     ];
     app.sortModel = {
-      'sort-by': WorkbasketAccessItemQuerySortParameter.ACCESS_ID,
+      'sortBy': WorkbasketAccessItemQuerySortParameter.ACCESS_ID,
       order: Direction.DESC
     };
     app.searchForAccessItemsWorkbaskets();
@@ -196,7 +196,7 @@ describe('AccessItemsManagementComponent', () => {
 
   it('should invoke sorting function correctly', () => {
     const newSort: Sorting<WorkbasketAccessItemQuerySortParameter> = {
-      'sort-by': WorkbasketAccessItemQuerySortParameter.ACCESS_ID,
+      'sortBy': WorkbasketAccessItemQuerySortParameter.ACCESS_ID,
       order: Direction.DESC
     };
     app.accessId = { accessId: '1', name: 'max' };

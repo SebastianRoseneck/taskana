@@ -14,7 +14,7 @@ export class SortComponent<T> implements OnInit {
   @Output() performSorting = new EventEmitter<Sorting<T>>();
 
   sort: Sorting<T> = {
-    'sort-by': undefined,
+    'sortBy': undefined,
     order: Direction.ASC
   };
 
@@ -22,7 +22,7 @@ export class SortComponent<T> implements OnInit {
   sortDirectionEnum = Direction;
 
   ngOnInit() {
-    this.sort['sort-by'] = this.defaultSortBy;
+    this.sort['sortBy'] = this.defaultSortBy;
   }
 
   changeOrder(sortDirection: Direction) {
@@ -31,7 +31,7 @@ export class SortComponent<T> implements OnInit {
   }
 
   changeSortBy(sortBy: T) {
-    this.sort['sort-by'] = sortBy;
+    this.sort['sortBy'] = sortBy;
     this.search();
   }
 

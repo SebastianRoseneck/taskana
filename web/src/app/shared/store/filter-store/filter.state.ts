@@ -5,21 +5,21 @@ import { ClearTaskFilter, ClearWorkbasketFilter, SetTaskFilter, SetWorkbasketFil
 import { TaskQueryFilterParameter } from '../../models/task-query-filter-parameter';
 
 const emptyWorkbasketFilter: WorkbasketQueryFilterParameter = {
-  'description-like': [],
-  'key-like': [],
-  'name-like': [],
-  'owner-like': [],
+  'descriptionLike': [],
+  'keyLike': [],
+  'nameLike': [],
+  'ownerLike': [],
   type: []
 };
 
 const emptyTaskFilter: TaskQueryFilterParameter = {
-  'name-like': [],
-  'owner-like': [],
+  'nameLike': [],
+  'ownerLike': [],
   state: [],
   priority: [],
-  'por.value': [],
-  'wildcard-search-fields': [],
-  'wildcard-search-value': []
+  'porValue': [],
+  'wildcardSearchFields': [],
+  'wildcardSearchValue': []
 };
 
 @State<FilterStateModel>({ name: 'FilterState' })
@@ -29,10 +29,10 @@ export class FilterState implements NgxsOnInit {
     const currentState = ctx.getState()[action.component];
     const param = action.parameters;
     const filter: WorkbasketQueryFilterParameter = {
-      'description-like': param['description-like'] ? [...param['description-like']] : currentState['description-like'],
-      'key-like': param['key-like'] ? [...param['key-like']] : currentState['key-like'],
-      'name-like': param['name-like'] ? [...param['name-like']] : currentState['name-like'],
-      'owner-like': param['owner-like'] ? [...param['owner-like']] : currentState['owner-like'],
+      'descriptionLike': param['descriptionLike'] ? [...param['descriptionLike']] : currentState['descriptionLike'],
+      'keyLike': param['keyLike'] ? [...param['keyLike']] : currentState['keyLike'],
+      'nameLike': param['nameLike'] ? [...param['nameLike']] : currentState['nameLike'],
+      'ownerLike': param['ownerLike'] ? [...param['ownerLike']] : currentState['ownerLike'],
       type: param['type'] ? [...param['type']] : currentState['type']
     };
 
@@ -63,12 +63,12 @@ export class FilterState implements NgxsOnInit {
       filter[key] = [...param[key]];
     });
 
-    const isWildcardSearch = filter['wildcard-search-value'].length !== 0 && filter['wildcard-search-value'] !== [''];
-    filter['wildcard-search-fields'] = isWildcardSearch ? this.initWildcardFields() : [];
+    const isWildcardSearch = filter['wildcardSearchValue'].length !== 0 && filter['wildcardSearchValue'] !== [''];
+    filter['wildcardSearchFields'] = isWildcardSearch ? this.initWildcardFields() : [];
 
     // Delete wildcard search field 'NAME' if 'name-like' exists
-    if (filter['name-like'].length > 0 && filter['name-like'][0] !== '') {
-      filter['wildcard-search-fields'].shift();
+    if (filter['nameLike'].length > 0 && filter['nameLike'][0] !== '') {
+      filter['wildcardSearchFields'].shift();
     }
 
     ctx.setState({

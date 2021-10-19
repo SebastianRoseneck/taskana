@@ -149,7 +149,7 @@ export class TaskListToolbarComponent implements OnInit {
 
   updateState() {
     const wildcardFilter: TaskQueryFilterParameter = {
-      'wildcard-search-value': [this.filterInput]
+      'wildcardSearchValue': [this.filterInput]
     };
     this.store.dispatch(new SetTaskFilter(wildcardFilter));
   }

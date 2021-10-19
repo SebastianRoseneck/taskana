@@ -41,7 +41,7 @@ export class AccessItemsManagementComponent implements OnInit {
   defaultSortBy: WorkbasketAccessItemQuerySortParameter = WorkbasketAccessItemQuerySortParameter.ACCESS_ID;
   sortingFields: Map<WorkbasketAccessItemQuerySortParameter, string> = WORKBASKET_ACCESS_ITEM_SORT_PARAMETER_NAMING;
   sortModel: Sorting<WorkbasketAccessItemQuerySortParameter> = {
-    'sort-by': this.defaultSortBy,
+    'sortBy': this.defaultSortBy,
     order: Direction.DESC
   };
   accessItems: WorkbasketAccessItems[];
@@ -89,7 +89,7 @@ export class AccessItemsManagementComponent implements OnInit {
   searchForAccessItemsWorkbaskets() {
     this.removeFocus();
     const filterParameter: WorkbasketAccessItemQueryFilterParameter = {
-      'access-id': [this.accessId, ...this.groups].map((a) => a.accessId)
+      'accessId': [this.accessId, ...this.groups].map((a) => a.accessId)
     };
     this.store
       .dispatch(new GetAccessItems(filterParameter, this.sortModel))
